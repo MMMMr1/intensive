@@ -124,7 +124,6 @@ public class CustomArrayList <E> extends AbstractList<E> implements RandomAccess
     private void quickSort(Comparator<? super E> c, E arr[], int begin, int end) {
         if (begin < end) {
             int partitionIndex = partition(c, arr, begin, end);
-
             quickSort(c, arr, begin, partitionIndex-1);
             quickSort(c, arr, partitionIndex+1, end);
         }
