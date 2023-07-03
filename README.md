@@ -7,7 +7,5 @@
  - remove(int index)
  - remove(Object o)
  - sort(Comparator<? super E> c) - QuickSort
-   
-   (testing CustomArrayList with CustomArrayListTest)
 
    
