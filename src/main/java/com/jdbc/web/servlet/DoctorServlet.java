@@ -2,10 +2,10 @@ package com.jdbc.web.servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.jdbc.dto.patient.PatientCreateDto;
-import com.jdbc.dto.patient.PatientEditDto;
-import com.jdbc.service.api.PatientService;
-import com.jdbc.service.fabrics.PatientServiceSingleton;
+import com.jdbc.dto.doctor.DoctorCreateDto;
+import com.jdbc.dto.doctor.DoctorEditDto;
+import com.jdbc.service.api.DoctorService;
+import com.jdbc.service.fabrics.DoctorServiceSingleton;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,15 +19,15 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "PatientServlet", urlPatterns = "/patients")
-public class PatientServlet extends HttpServlet {
+@WebServlet(name = "DoctorServlet", urlPatterns = "/doctors")
+public class DoctorServlet extends HttpServlet {
 
-    private final PatientService service;
+    private final DoctorService service;
     ObjectMapper objectMapper = new ObjectMapper();
     private Gson gson = new Gson();
 
-    public PatientServlet() throws PropertyVetoException {
-        this.service = PatientServiceSingleton.getInstance();
+    public DoctorServlet() throws PropertyVetoException {
+        this.service = DoctorServiceSingleton.getInstance();
     }
 
 
@@ -51,8 +51,8 @@ public class PatientServlet extends HttpServlet {
                           HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-        PatientCreateDto patient = objectMapper.readValue(req.getReader(), PatientCreateDto.class);
-        service.create(patient);
+        DoctorCreateDto doctor = objectMapper.readValue(req.getReader(), DoctorCreateDto.class);
+        service.create(doctor);
     }
 
         @Override
@@ -70,7 +70,7 @@ public class PatientServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-        PatientEditDto patient = objectMapper.readValue(req.getReader(), PatientEditDto.class);
+        DoctorEditDto patient = objectMapper.readValue(req.getReader(), DoctorEditDto.class);
 
         PrintWriter writer = resp.getWriter();
         writer.write("uuid" + patient.getUuid()+ " patient "+ patient.getLastName());
