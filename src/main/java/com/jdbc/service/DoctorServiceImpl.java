@@ -1,15 +1,13 @@
 package com.jdbc.service;
 
 import com.jdbc.dao.EntityTransaction;
-import com.jdbc.dao.api.PatientDao;
-import com.jdbc.dto.patient.PatientCreateDto;
-import com.jdbc.dto.patient.PatientEditDto;
-import com.jdbc.dto.patient.PatientReadDto;
-import com.jdbc.entity.Patient;
-import com.jdbc.mapper.mapper.PatientCreateMapper;
-import com.jdbc.mapper.mapper.PatientEditMapper;
-import com.jdbc.mapper.mapper.PatientReadMapper;
-import com.jdbc.service.api.PatientService;
+import com.jdbc.dao.api.DoctorDao;
+import com.jdbc.dto.doctor.DoctorCreateDto;
+import com.jdbc.dto.doctor.DoctorEditDto;
+import com.jdbc.dto.doctor.DoctorReadDto;
+import com.jdbc.entity.Doctor;
+import com.jdbc.mapper.mapper.*;
+import com.jdbc.service.api.DoctorService;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,31 +15,31 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class PatientServiceImpl implements PatientService {
+public class DoctorServiceImpl implements DoctorService {
 
-    private final PatientDao dao;
-    private final PatientCreateMapper createMapper;
-    private final PatientEditMapper editMapper;
-    private final PatientReadMapper readMapper;
+    private final DoctorDao dao;
+    private final DoctorCreateMapper createMapper;
+    private final DoctorEditMapper editMapper;
+    private final DoctorReadMapper readMapper;
 
-    public PatientServiceImpl(PatientDao dao) {
+    public DoctorServiceImpl(DoctorDao dao) {
         this.dao = dao;
-        this.createMapper = new PatientCreateMapper();
-        this.readMapper = new PatientReadMapper();
-        this.editMapper = new PatientEditMapper();
+        this.createMapper = new DoctorCreateMapper();
+        this.readMapper = new DoctorReadMapper();
+        this.editMapper = new DoctorEditMapper();
     }
 
     @Override
-    public void create(PatientCreateDto patientDto) {
+    public void create(DoctorCreateDto doctorCreateDto) {
 //        Transactional
         EntityTransaction transaction = new EntityTransaction();
         transaction.initTransaction(dao);
         try {
-            Patient patient = createMapper.map(patientDto);
-            patient.setId(UUID.randomUUID());
-            patient.setDtCreated(LocalDateTime.now());
-            patient.setDtUpdated(LocalDateTime.now());
-            dao.create(patient);
+            Doctor doctor = createMapper.map(doctorCreateDto);
+            doctor.setId(UUID.randomUUID());
+            doctor.setDtCreated(LocalDateTime.now());
+            doctor.setDtUpdated(LocalDateTime.now());
+            dao.create(doctor);
             transaction.commit();
         } catch (RuntimeException e) {
             transaction.rollback();
@@ -52,8 +50,8 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Optional<PatientReadDto> findPatientById(UUID id) {
-        return dao.findPatientById(id)
+    public Optional<DoctorReadDto> findDoctorById(UUID id) {
+        return dao.findDoctorById(id)
                 .map(readMapper::map);
     }
 
@@ -74,12 +72,12 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public void update(UUID uuid, PatientEditDto patient) {
+    public void update(UUID uuid, DoctorEditDto patient) {
         //        Transactional
         EntityTransaction transaction = new EntityTransaction();
         transaction.initTransaction(dao);
         try {
-            Patient map = editMapper.map(patient);
+            Doctor map = editMapper.map(patient);
             map.setDtUpdated(LocalDateTime.now());
             dao.update(uuid, map);
             transaction.commit();
@@ -92,7 +90,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<PatientReadDto> findAll() {
+    public List<DoctorReadDto> findAll() {
         return dao.findAll().stream()
                 .map(readMapper::map)
                 .collect(Collectors.toList());

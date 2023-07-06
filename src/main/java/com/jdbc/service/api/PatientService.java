@@ -1,9 +1,9 @@
 package com.jdbc.service.api;
 
 
-import com.jdbc.dto.PatientCreateDto;
-import com.jdbc.dto.PatientEditDto;
-import com.jdbc.dto.PatientReadDto;
+import com.jdbc.dto.patient.PatientCreateDto;
+import com.jdbc.dto.patient.PatientEditDto;
+import com.jdbc.dto.patient.PatientReadDto;
 
 import java.util.List;
 import java.util.Optional;
