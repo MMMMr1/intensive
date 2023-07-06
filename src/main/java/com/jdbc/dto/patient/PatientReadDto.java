@@ -1,45 +1,36 @@
-package com.jdbc.dto;
+package com.jdbc.dto.patient;
 
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class PatientEditDto {
-    @JsonProperty("uuid")
-    private UUID uuid;
-    @JsonProperty("lastName")
+public class PatientReadDto {
+    private UUID id;
     private String lastName;
-    @JsonProperty("firstName")
     private String firstName;
-    @JsonProperty("surName")
     private String surName;
-    @JsonProperty("address")
     private String address;
-    @JsonProperty("phone")
     private String phone;
-    @JsonProperty("medicalCardNumber")
     private String medicalCardNumber;
-
-    public PatientEditDto() {
-    }
-
-    public PatientEditDto(UUID uuid, String lastName, String firstName, String surName, String address, String phone, String medicalCardNumber) {
-        this.uuid = uuid;
+    private LocalDateTime dtCreated;
+    private LocalDateTime dtUpdated;
+    public PatientReadDto(UUID id, String lastName, String firstName, String surName, String address, String phone, String medicalCardNumber, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
+        this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
         this.surName = surName;
         this.address = address;
         this.phone = phone;
         this.medicalCardNumber = medicalCardNumber;
+        this.dtCreated = dtCreated;
+        this.dtUpdated = dtUpdated;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getId() {
+        return id;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getLastName() {
@@ -90,17 +81,19 @@ public class PatientEditDto {
         this.medicalCardNumber = medicalCardNumber;
     }
 
+    public LocalDateTime getDtCreated() {
+        return dtCreated;
+    }
 
+    public void setDtCreated(LocalDateTime dtCreated) {
+        this.dtCreated = dtCreated;
+    }
 
-    @Override
-    public String toString() {
-        return "Patient{" +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", surName='" + surName + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", medicalCardNumber='" + medicalCardNumber + '\'' +
-                '}';
+    public LocalDateTime getDtUpdated() {
+        return dtUpdated;
+    }
+
+    public void setDtUpdated(LocalDateTime dtUpdated) {
+        this.dtUpdated = dtUpdated;
     }
 }

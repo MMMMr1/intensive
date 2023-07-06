@@ -1,27 +1,30 @@
-package com.jdbc.dto;
+package com.jdbc.dto.doctor;
 
-import java.time.Instant;
+
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class PatientReadDto {
+public class DoctorReadDto {
     private UUID id;
     private String lastName;
     private String firstName;
     private String surName;
-    private String address;
-    private String phone;
-    private String medicalCardNumber;
+    private String position;
+    private String department;
     private LocalDateTime dtCreated;
     private LocalDateTime dtUpdated;
-    public PatientReadDto(UUID id, String lastName, String firstName, String surName, String address, String phone, String medicalCardNumber, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
+
+    public DoctorReadDto() {
+    }
+
+    public DoctorReadDto(UUID id, String lastName, String firstName, String surName, String position, String department, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
         this.surName = surName;
-        this.address = address;
-        this.phone = phone;
-        this.medicalCardNumber = medicalCardNumber;
+        this.position = position;
+        this.department = department;
         this.dtCreated = dtCreated;
         this.dtUpdated = dtUpdated;
     }
@@ -58,28 +61,20 @@ public class PatientReadDto {
         this.surName = surName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPosition() {
+        return position;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getMedicalCardNumber() {
-        return medicalCardNumber;
-    }
-
-    public void setMedicalCardNumber(String medicalCardNumber) {
-        this.medicalCardNumber = medicalCardNumber;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public LocalDateTime getDtCreated() {

@@ -1,4 +1,4 @@
-package com.jdbc.dto;
+package com.jdbc.dto.patient;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
