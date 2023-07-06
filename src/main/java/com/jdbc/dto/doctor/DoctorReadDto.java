@@ -1,7 +1,5 @@
 package com.jdbc.dto.doctor;
 
-
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 

@@ -11,7 +11,9 @@ public class PatientReadDto {
     private String address;
     private String phone;
     private String medicalCardNumber;
+
     private LocalDateTime dtCreated;
+
     private LocalDateTime dtUpdated;
     public PatientReadDto(UUID id, String lastName, String firstName, String surName, String address, String phone, String medicalCardNumber, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
         this.id = id;

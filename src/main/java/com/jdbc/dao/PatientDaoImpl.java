@@ -79,8 +79,8 @@ public class PatientDaoImpl implements PatientDao {
     public List<Patient> findAll() {
         List<Patient> list = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 UUID uuid = (UUID) resultSet.getObject("uuid");
                 String lastname = resultSet.getString("lastname");
@@ -89,13 +89,13 @@ public class PatientDaoImpl implements PatientDao {
                 String address = resultSet.getString("address");
                 String phone = resultSet.getString("phone");
                 String medicalCardNumber = resultSet.getString("medical_card_number");
-                LocalDateTime dtCreated = (LocalDateTime) resultSet.getObject("dt_created");
-                LocalDateTime dtUpdated = (LocalDateTime) resultSet.getObject("dt_updated");
+                LocalDateTime dtCreated =  resultSet.getObject("dt_created", LocalDateTime.class);
+                LocalDateTime dtUpdated =  resultSet.getObject("dt_updated", LocalDateTime.class);
                 list.add(new Patient(uuid, lastname, firstname, surname, address, phone, medicalCardNumber, dtCreated, dtUpdated));
             }
             return list;
         } catch (SQLException e) {
-            throw new RuntimeException("Ошибка соединения с базой данных");
+            throw new RuntimeException("Database connection error ", e);
         }
     }
 
@@ -114,8 +114,8 @@ public class PatientDaoImpl implements PatientDao {
                 String address = resultSet.getString("address");
                 String phone = resultSet.getString("phone");
                 String medicalCardNumber = resultSet.getString("medical_card_number");
-                LocalDateTime dtCreated = (LocalDateTime) resultSet.getObject("dt_created");
-                LocalDateTime dtUpdated = (LocalDateTime) resultSet.getObject("dt_updated");
+                LocalDateTime dtCreated =  resultSet.getObject("dt_created", LocalDateTime.class);
+                LocalDateTime dtUpdated =  resultSet.getObject("dt_updated", LocalDateTime.class);
                 patient = new Patient(uuid, lastname, firstname, surname, address, phone, medicalCardNumber, dtCreated, dtUpdated);
             }
             return Optional.ofNullable(patient);

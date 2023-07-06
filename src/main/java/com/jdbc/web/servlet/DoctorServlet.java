@@ -42,7 +42,7 @@ public class DoctorServlet extends HttpServlet {
                 .map(s ->  gson.toJson(s))
                 .collect(Collectors.toList());
         PrintWriter out = resp.getWriter();
-        out.print("collect");
+        out.print(collect);
         out.flush();
     }
 

@@ -77,8 +77,8 @@ public class DoctorDaoImpl implements DoctorDao {
     public List<Doctor> findAll() {
         List<Doctor> list = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 UUID uuid = (UUID) resultSet.getObject("uuid");
                 String lastname = resultSet.getString("lastname");
@@ -86,13 +86,13 @@ public class DoctorDaoImpl implements DoctorDao {
                 String surname = resultSet.getString("surname");
                 String position = resultSet.getString("position");
                 String department = resultSet.getString("department");
-                LocalDateTime dtCreated = (LocalDateTime) resultSet.getObject("dt_created");
-                LocalDateTime dtUpdated = (LocalDateTime) resultSet.getObject("dt_updated");
+                LocalDateTime dtCreated = (LocalDateTime) resultSet.getObject("dt_created", LocalDateTime.class);
+                LocalDateTime dtUpdated = (LocalDateTime) resultSet.getObject("dt_updated", LocalDateTime.class);
                 list.add(new Doctor(uuid, lastname, firstname, surname, position, department, dtCreated, dtUpdated));
             }
             return list;
         } catch (SQLException e) {
-            throw new RuntimeException("Ошибка соединения с базой данных");
+            throw new RuntimeException("Database connection error", e);
         }
     }
 
@@ -110,8 +110,8 @@ public class DoctorDaoImpl implements DoctorDao {
                 String surname = resultSet.getString("surname");
                 String position = resultSet.getString("position");
                 String department = resultSet.getString("department");
-                LocalDateTime dtCreated = (LocalDateTime) resultSet.getObject("dt_created");
-                LocalDateTime dtUpdated = (LocalDateTime) resultSet.getObject("dt_updated");
+                LocalDateTime dtCreated = (LocalDateTime) resultSet.getObject("dt_created", LocalDateTime.class);
+                LocalDateTime dtUpdated = (LocalDateTime) resultSet.getObject("dt_updated", LocalDateTime.class);
                 doctor = new Doctor(uuid, lastname, firstname, surname, position, department, dtCreated, dtUpdated);
             }
             return Optional.ofNullable(doctor);
