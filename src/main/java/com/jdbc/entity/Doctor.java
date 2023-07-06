@@ -1,6 +1,7 @@
 package com.jdbc.entity;
 
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Doctor implements Entity {
@@ -10,6 +11,22 @@ public class Doctor implements Entity {
     private String surName;
     private String position;
     private String department;
+    private LocalDateTime dtCreated;
+    private LocalDateTime dtUpdated;
+
+    public Doctor() {
+    }
+
+    public Doctor(UUID id, String lastName, String firstName, String surName, String position, String department, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
+        this.id = id;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.surName = surName;
+        this.position = position;
+        this.department = department;
+        this.dtCreated = dtCreated;
+        this.dtUpdated = dtUpdated;
+    }
 
     public UUID getId() {
         return id;
@@ -57,6 +74,22 @@ public class Doctor implements Entity {
 
     public void setSurName(String surName) {
         this.surName = surName;
+    }
+
+    public LocalDateTime getDtCreated() {
+        return dtCreated;
+    }
+
+    public void setDtCreated(LocalDateTime dtCreated) {
+        this.dtCreated = dtCreated;
+    }
+
+    public LocalDateTime getDtUpdated() {
+        return dtUpdated;
+    }
+
+    public void setDtUpdated(LocalDateTime dtUpdated) {
+        this.dtUpdated = dtUpdated;
     }
 
     @Override

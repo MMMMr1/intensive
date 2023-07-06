@@ -1,6 +1,6 @@
 package com.jdbc.mapper.mapper;
 
-import com.jdbc.dto.PatientEditDto;
+import com.jdbc.dto.patient.PatientEditDto;
 import com.jdbc.entity.Patient;
 import com.jdbc.mapper.Mapper;
 
