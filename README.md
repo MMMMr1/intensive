@@ -32,18 +32,19 @@ ______________________________________________________________________________
 
 Описание проекта:
 
-   Возможности: 
-   регистрировать пациента, получить персональные данные пациентов:
+   Возможности:    регистрировать пациента, получить персональные данные пациентов:
    
-   uuid, фамилия, имя, отчество, адрес, телефон, номер медицинской карты, время создания и обновления;
+  	 uuid, фамилия, имя, отчество, адрес, телефон, номер медицинской карты, время создания и обновления;
    
-   регистрировать врачей, получить их данные: 
+   	регистрировать врачей, получить их данные: 
    
-   uuid,  фамилия, имя, отчество, адрес, должность, отделение, время создания и обновления;
+   	uuid,  фамилия, имя, отчество, адрес, должность, отделение, время создания и обновления;
+		
+  		записать диагноз и лечение
 
-   записать диагноз и лечение
-
-  Проект написан с использованием JDBC. Транзакции для операций create, update, delete контролируются на уровне сервисов с помощью EntityTransaction.java. Пул соединений организован с помощью библиотеки c3p0;
+  Проект написан с использованием JDBC. 
+		Транзакции для операций create, update, delete контролируются на уровне сервисов с помощью EntityTransaction.java. 
+		Пул соединений организован с помощью библиотеки c3p0;
 
   Для сборки проекта нужно внести данные о базе данных в файл application.properties и сохранить его в папке /conf apache-tomcat
 
@@ -63,65 +64,51 @@ ________________________________________________________________________________
 
 Endpoints: 
 
-Создание пациента:
-
-![image](https://github.com/MMMMr1/intensive/assets/95496893/beb5ce78-df3c-40b2-b068-2125829855d5)
+Создание пациента: http://localhost:8080/hospital-1.0/patients (POST)
+ 
 ![image](https://github.com/MMMMr1/intensive/assets/95496893/95890769-29a7-46cf-a63d-4d91a654e5d3)
 
-Внесение изменений в данные пациента:
-
-<img width="310" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/27ab5b38-0719-4b0e-a016-0762a8dd68c6">
+Внесение изменений в данные пациента: http://localhost:8080/hospital-1.0/patients (PUT)
+ 
 <img width="308" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/684ef0f6-ec54-4d2a-96bb-509566efa4e3">
 
-Удаление пациента:
+Удаление пациента: http://localhost:8080/hospital-1.0/patients (DELETE)
 
-![image](https://github.com/MMMMr1/intensive/assets/95496893/16dabb2e-8154-47b2-874c-fb18a6409425)
 
-Получение данных всех пациентов:
-
-<img width="307" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/a86391bb-47cb-4d97-8dea-54f7416f482e">
+Получение данных всех пациентов: http://localhost:8080/hospital-1.0/patients (GET)
 
 _____________________________________________________________________________
 
-Создание врача:
-
-<img width="314" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/a35bd60b-e920-48a0-883a-17219792a6b9">
+Создание врача: http://localhost:8080/hospital-1.0/doctors (POST)
 
 <img width="194" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/4d080003-7fa8-4643-a092-c6aa37777380">
  
 
-Внесение изменений в данные врача:
-
-<img width="302" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/b2b5e699-1f96-47c4-93ee-b2c8748b920c">
+Внесение изменений в данные врача: http://localhost:8080/hospital-1.0/doctors (PUT)
 
 <img width="194" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/4d080003-7fa8-4643-a092-c6aa37777380">
  
 
-Удаление врача:
-
-<img width="532" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/27c6f707-fdc0-4ff2-97e9-1889ce2eb58c">
+Удаление врача: http://localhost:8080/hospital-1.0/doctors (DELETE)
  
-Получение данных всех врачей:
-
-![image](https://github.com/MMMMr1/intensive/assets/95496893/61734d53-4880-4c4f-bf8f-9e1f5a06add8)
+ 
+Получение данных всех врачей: http://localhost:8080/hospital-1.0/doctors (GET)
+ 
 
 Сервис истории болезни:
 
-Создание карты истории болезни:
+Создание карты истории болезни: http://localhost:8080/hospital-1.0/histories (POST)
 
-![image](https://github.com/MMMMr1/intensive/assets/95496893/19593231-a46e-47ac-9c42-d3e503502e17)
 <img width="347" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/0b742ace-e2bf-414e-b5a1-4a77c2084a0a">
 
-Внесение изменение в карточку истории болезни:
+Внесение изменение в карточку истории болезни: http://localhost:8080/hospital-1.0/histories (PUT)
 
-<img width="331" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/6a43b66d-7dde-4fa5-8478-268cb0cbd937">
 <img width="334" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/27ea9f46-5a87-448e-b8ff-d602773ee35b">
 
+Удаление карточки истории болезни: http://localhost:8080/hospital-1.0/histories (DELETE)
 
-
-Получение всех карт истории болезни:
-
-![image](https://github.com/MMMMr1/intensive/assets/95496893/3a45e4a1-8d52-40eb-8d0d-5fada6c5d5ac)
+Получение всех карт истории болезни: http://localhost:8080/hospital-1.0/histories (GET)
+ 
 
 
 
