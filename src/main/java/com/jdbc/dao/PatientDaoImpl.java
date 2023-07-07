@@ -19,7 +19,7 @@ public class PatientDaoImpl implements PatientDao {
     private final String SQL_UPDATE = "UPDATE  app.patients SET lastname = ?, firstname = ?, surname = ?, address = ?, phone = ?, medical_card_number = ?, dt_updated  = ? WHERE uuid = ?;";
     private final String SQL_DELETE = "DELETE FROM app.patients  WHERE uuid = ?;";
     private final String SQL_GET = "SELECT uuid, lastname, firstname, surname, address, phone, medical_card_number, dt_created, dt_updated FROM app.patients;";
-    private final String SQL_GET_BY_ID = "SELECT uuid, lastname, firstname, surname, address, phone, medical_card_number, dt_created, dt_updated FROM app.patients WHERE id = ?;";
+    private final String SQL_GET_BY_ID = "SELECT uuid, lastname, firstname, surname, address, phone, medical_card_number, dt_created, dt_updated FROM app.patients WHERE uuid = ?;";
     private DataSourceWrapper dataSource;
     private Connection connection;
 
@@ -79,7 +79,9 @@ public class PatientDaoImpl implements PatientDao {
     public List<Patient> findAll() {
         List<Patient> list = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET,
+                     ResultSet.TYPE_SCROLL_INSENSITIVE,
+                     ResultSet.CONCUR_READ_ONLY)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 UUID uuid = (UUID) resultSet.getObject("uuid");
@@ -103,7 +105,7 @@ public class PatientDaoImpl implements PatientDao {
     public Optional<Patient> findPatientById(UUID uuid) {
         Patient patient = null;
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_GET_BY_ID)
+             PreparedStatement statement = connection.prepareStatement(SQL_GET_BY_ID, ResultSet.CONCUR_READ_ONLY)
         ) {
             statement.setObject(1, uuid);
             ResultSet resultSet = statement.executeQuery();

@@ -19,7 +19,7 @@ public class DoctorDaoImpl implements DoctorDao {
     private final String SQL_UPDATE = "UPDATE  app.doctors SET lastname = ?, firstname = ?, surname = ?, position = ?, department = ?,  dt_updated  = ? WHERE uuid = ?;";
     private final String SQL_DELETE = "DELETE FROM app.doctors  WHERE uuid = ?;";
     private final String SQL_GET = "SELECT uuid, lastname, firstname, surname, position, department, dt_created, dt_updated FROM app.doctors;";
-    private final String SQL_GET_BY_ID = "SELECT uuid, lastname, firstname, surname, position, department, dt_created, dt_updated FROM app.doctors WHERE id = ?;";
+    private final String SQL_GET_BY_ID = "SELECT uuid, lastname, firstname, surname, position, department, dt_created, dt_updated FROM app.doctors WHERE uuid = ?;";
     private DataSourceWrapper dataSource;
     private Connection connection;
 
@@ -77,7 +77,9 @@ public class DoctorDaoImpl implements DoctorDao {
     public List<Doctor> findAll() {
         List<Doctor> list = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET,
+                     ResultSet.TYPE_SCROLL_INSENSITIVE,
+                     ResultSet.CONCUR_READ_ONLY)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 UUID uuid = (UUID) resultSet.getObject("uuid");
@@ -86,8 +88,8 @@ public class DoctorDaoImpl implements DoctorDao {
                 String surname = resultSet.getString("surname");
                 String position = resultSet.getString("position");
                 String department = resultSet.getString("department");
-                LocalDateTime dtCreated = (LocalDateTime) resultSet.getObject("dt_created", LocalDateTime.class);
-                LocalDateTime dtUpdated = (LocalDateTime) resultSet.getObject("dt_updated", LocalDateTime.class);
+                LocalDateTime dtCreated =  resultSet.getObject("dt_created", LocalDateTime.class);
+                LocalDateTime dtUpdated =  resultSet.getObject("dt_updated", LocalDateTime.class);
                 list.add(new Doctor(uuid, lastname, firstname, surname, position, department, dtCreated, dtUpdated));
             }
             return list;
@@ -100,7 +102,8 @@ public class DoctorDaoImpl implements DoctorDao {
     public Optional<Doctor> findDoctorById(UUID uuid) {
         Doctor doctor = null;
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_GET_BY_ID)
+             PreparedStatement statement = connection.prepareStatement(SQL_GET_BY_ID,
+                     ResultSet.CONCUR_READ_ONLY)
         ) {
             statement.setObject(1, uuid);
             ResultSet resultSet = statement.executeQuery();
@@ -110,8 +113,8 @@ public class DoctorDaoImpl implements DoctorDao {
                 String surname = resultSet.getString("surname");
                 String position = resultSet.getString("position");
                 String department = resultSet.getString("department");
-                LocalDateTime dtCreated = (LocalDateTime) resultSet.getObject("dt_created", LocalDateTime.class);
-                LocalDateTime dtUpdated = (LocalDateTime) resultSet.getObject("dt_updated", LocalDateTime.class);
+                LocalDateTime dtCreated =  resultSet.getObject("dt_created", LocalDateTime.class);
+                LocalDateTime dtUpdated =  resultSet.getObject("dt_updated", LocalDateTime.class);
                 doctor = new Doctor(uuid, lastname, firstname, surname, position, department, dtCreated, dtUpdated);
             }
             return Optional.ofNullable(doctor);

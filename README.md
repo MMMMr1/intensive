@@ -7,5 +7,6 @@
  - remove(int index)
  - remove(Object o)
  - sort(Comparator<? super E> c) - QuickSort
+2.   ![img.png](img.png)
 
    
