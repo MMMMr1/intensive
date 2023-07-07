@@ -2,29 +2,69 @@ package com.jdbc.entity;
 
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 
 public class MedicalHistory implements Entity {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-//    @Column(name = "id", nullable = false)
-    private Long id;
-    private LocalDateTime dateTime;
-//    @ManyToOne
-//    @JoinColumn(name = "patient_id")
-    private Patient patient;
-//    @ManyToOne
-//    @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
+    private UUID uuid;
+    private UUID patient;
+    private UUID doctor;
     private String diagnosis;
     private String treatment;
+    private LocalDateTime dtCreated;
+    private LocalDateTime dtUpdated;
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public MedicalHistory() {
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public MedicalHistory(UUID uuid, UUID patient, UUID doctor, String diagnosis, String treatment, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
+        this.uuid = uuid;
+        this.patient = patient;
+        this.doctor = doctor;
+        this.diagnosis = diagnosis;
+        this.treatment = treatment;
+        this.dtCreated = dtCreated;
+        this.dtUpdated = dtUpdated;
+    }
+
+    public UUID getPatient() {
+        return patient;
+    }
+
+    public void setPatient(UUID patient) {
+        this.patient = patient;
+    }
+
+    public UUID getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(UUID doctor) {
+        this.doctor = doctor;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public LocalDateTime getDtCreated() {
+        return dtCreated;
+    }
+
+    public void setDtCreated(LocalDateTime dtCreated) {
+        this.dtCreated = dtCreated;
+    }
+
+    public LocalDateTime getDtUpdated() {
+        return dtUpdated;
+    }
+
+    public void setDtUpdated(LocalDateTime dtUpdated) {
+        this.dtUpdated = dtUpdated;
     }
 
     public String getDiagnosis() {
@@ -43,28 +83,5 @@ public class MedicalHistory implements Entity {
         this.treatment = treatment;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
-    }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
