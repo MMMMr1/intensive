@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class MedicalHistoryDaoImpl implements MedicalHistoryDao {
-    private final String SQL_CREATE = "INSERT INTO app.medical_histories (uuid, diagnosis, treatment, dt_created, dt_updated, id_patient, id_doctor) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    private final String SQL_CREATE = "INSERT INTO app.medical_histories (uuid, diagnosis, treatment, dt_created, dt_updated, id_patient, id_doctor) VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING uuid;";
     private final String SQL_UPDATE = "UPDATE  app.medical_histories SET diagnosis = ?, treatment = ?, id_patient = ?, id_doctor = ?, dt_updated  = ? WHERE uuid = ?;";
     private final String SQL_DELETE = "DELETE FROM app.medical_histories  WHERE uuid = ?;";
     private final String SQL_GET = "SELECT uuid, diagnosis, treatment, dt_created, dt_updated, id_patient, id_doctor FROM app.medical_histories;";
@@ -30,7 +30,8 @@ public class MedicalHistoryDaoImpl implements MedicalHistoryDao {
     }
 
     @Override
-    public void create(MedicalHistory history) {
+    public UUID create(MedicalHistory history) {
+        UUID uuid = null;
         try {
              PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE);
             preparedStatement.setObject(1, history.getUuid());
@@ -40,7 +41,12 @@ public class MedicalHistoryDaoImpl implements MedicalHistoryDao {
             preparedStatement.setObject(5, history.getDtUpdated());
             preparedStatement.setObject(6, history.getPatient());
             preparedStatement.setObject(7, history.getDoctor());
-            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                uuid = (UUID) resultSet.getObject("uuid");
+            }
+            return uuid;
         } catch (SQLException e) {
             throw new RuntimeException("Database connection error", e);
         }

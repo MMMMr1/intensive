@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface DoctorDao extends Transactional{
-    void create (Doctor t);
+    UUID create (Doctor t);
     void update(UUID uuid, Doctor t);
     void delete(UUID uuid);
     List<Doctor> findAll();

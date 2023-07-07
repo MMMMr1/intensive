@@ -32,17 +32,19 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public void create(PatientCreateDto patientDto) {
+    public UUID create(PatientCreateDto patientDto) {
 //        Transactional
         EntityTransaction transaction = new EntityTransaction();
         transaction.initTransaction(dao);
+        UUID uuid;
         try {
             Patient patient = createMapper.map(patientDto);
             patient.setId(UUID.randomUUID());
             patient.setDtCreated(LocalDateTime.now());
             patient.setDtUpdated(LocalDateTime.now());
-            dao.create(patient);
+            uuid = dao.create(patient);
             transaction.commit();
+            return uuid;
         } catch (RuntimeException e) {
             transaction.rollback();
             throw new RuntimeException(e);

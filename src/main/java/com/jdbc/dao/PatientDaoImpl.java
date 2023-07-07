@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class PatientDaoImpl implements PatientDao {
-    private final String SQL_CREATE = "INSERT INTO app.patients (uuid, lastname, firstname, surname, address, phone, medical_card_number, dt_created, dt_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    private final String SQL_CREATE = "INSERT INTO app.patients (uuid, lastname, firstname, surname, address, phone, medical_card_number, dt_created, dt_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING uuid;";
     private final String SQL_UPDATE = "UPDATE  app.patients SET lastname = ?, firstname = ?, surname = ?, address = ?, phone = ?, medical_card_number = ?, dt_updated  = ? WHERE uuid = ?;";
     private final String SQL_DELETE = "DELETE FROM app.patients  WHERE uuid = ?;";
     private final String SQL_GET = "SELECT uuid, lastname, firstname, surname, address, phone, medical_card_number, dt_created, dt_updated FROM app.patients;";
@@ -28,7 +28,8 @@ public class PatientDaoImpl implements PatientDao {
     }
 
     @Override
-    public void create(Patient patient) {
+    public UUID create(Patient patient) {
+        UUID uuid = null;
         try {
              PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE);
             preparedStatement.setObject(1, patient.getId());
@@ -40,7 +41,12 @@ public class PatientDaoImpl implements PatientDao {
             preparedStatement.setString(7, patient.getMedicalCardNumber());
             preparedStatement.setObject(8, patient.getDtCreated());
             preparedStatement.setObject(9, patient.getDtUpdated());
-            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                uuid = (UUID) resultSet.getObject("uuid");
+            }
+            return uuid;
         } catch (SQLException e) {
             throw new RuntimeException("Database connection error", e);
         }
@@ -100,7 +106,6 @@ public class PatientDaoImpl implements PatientDao {
             throw new RuntimeException("Database connection error ", e);
         }
     }
-
     @Override
     public Optional<Patient> findPatientById(UUID uuid) {
         Patient patient = null;

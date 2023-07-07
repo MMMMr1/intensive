@@ -38,10 +38,11 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
     }
 
     @Override
-    public void create(MedicalHistoryCreateDto historyCreateDto) {
+    public UUID create(MedicalHistoryCreateDto historyCreateDto) {
 //        Transactional
         EntityTransaction transaction = new EntityTransaction();
         transaction.initTransaction(dao);
+        UUID uuid;
         try {
             MedicalHistory history = createMapper.map(historyCreateDto);
             Optional<DoctorReadDto> doctorById = doctorService.findDoctorById(historyCreateDto.getDoctor());
@@ -52,8 +53,9 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
             history.setUuid(UUID.randomUUID());
             history.setDtCreated(LocalDateTime.now());
             history.setDtUpdated(LocalDateTime.now());
-            dao.create(history);
+            uuid = dao.create(history);
             transaction.commit();
+            return uuid;
         } catch (RuntimeException e) {
             transaction.rollback();
             throw new RuntimeException(e);

@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface MedicalHistoryDao extends Transactional{
-    void create (MedicalHistory t);
+    UUID create (MedicalHistory t);
     void update(UUID uuid, MedicalHistory t);
     void delete(UUID uuid);
     List<MedicalHistory> findAll();

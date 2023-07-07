@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class DoctorDaoImpl implements DoctorDao {
-    private final String SQL_CREATE = "INSERT INTO app.doctors (uuid, lastname, firstname, surname, position, department, dt_created, dt_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    private final String SQL_CREATE = "INSERT INTO app.doctors (uuid, lastname, firstname, surname, position, department, dt_created, dt_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING uuid;";
     private final String SQL_UPDATE = "UPDATE  app.doctors SET lastname = ?, firstname = ?, surname = ?, position = ?, department = ?,  dt_updated  = ? WHERE uuid = ?;";
     private final String SQL_DELETE = "DELETE FROM app.doctors  WHERE uuid = ?;";
     private final String SQL_GET = "SELECT uuid, lastname, firstname, surname, position, department, dt_created, dt_updated FROM app.doctors;";
@@ -28,7 +28,8 @@ public class DoctorDaoImpl implements DoctorDao {
     }
 
     @Override
-    public void create(Doctor doctor) {
+    public UUID create(Doctor doctor) {
+        UUID uuid = null;
         try {
              PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE);
             preparedStatement.setObject(1, doctor.getId());
@@ -39,7 +40,12 @@ public class DoctorDaoImpl implements DoctorDao {
             preparedStatement.setString(6, doctor.getDepartment());
             preparedStatement.setObject(7, doctor.getDtCreated());
             preparedStatement.setObject(8, doctor.getDtUpdated());
-            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                uuid = (UUID) resultSet.getObject("uuid");
+            }
+            return uuid;
         } catch (SQLException e) {
             throw new RuntimeException("Database connection error", e);
         }

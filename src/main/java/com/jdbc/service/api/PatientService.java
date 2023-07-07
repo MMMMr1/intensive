@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface PatientService  {
-    void create ( PatientCreateDto patient );
+    UUID create ( PatientCreateDto patient );
     Optional<PatientReadDto> findPatientById(UUID id );
     void delete(UUID uuid);
     void update(UUID uuid, PatientEditDto t);

@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface MedicalHistoryService {
-    void create ( MedicalHistoryCreateDto patient );
+    UUID create ( MedicalHistoryCreateDto patient );
     Optional<MedicalHistoryReadDto> findMedicalHistoryById(UUID id );
     void delete(UUID uuid);
     void update(UUID uuid, MedicalHistoryEditDto t);

@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface DoctorService {
-    void create ( DoctorCreateDto patient );
+    UUID create ( DoctorCreateDto patient );
     Optional<DoctorReadDto> findDoctorById(UUID id );
     void delete(UUID uuid);
     void update(UUID uuid, DoctorEditDto t);

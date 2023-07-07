@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface PatientDao extends Transactional{
-    void create (Patient t);
+    UUID create (Patient t);
     void update(UUID uuid, Patient t);
     void delete(UUID uuid);
     List<Patient> findAll();
