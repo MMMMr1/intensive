@@ -86,12 +86,14 @@ _____________________________________________________________________________
 Создание врача:
 
 <img width="314" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/a35bd60b-e920-48a0-883a-17219792a6b9">
+
 <img width="194" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/4d080003-7fa8-4643-a092-c6aa37777380">
  
 
 Внесение изменений в данные врача:
 
 <img width="302" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/b2b5e699-1f96-47c4-93ee-b2c8748b920c">
+
 <img width="194" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/4d080003-7fa8-4643-a092-c6aa37777380">
  
 
