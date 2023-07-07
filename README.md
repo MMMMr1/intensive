@@ -26,7 +26,6 @@ _______________________________________________________________________________
  технологии:
 
  - Java 11
- - 
  - Postgresql
 
 ______________________________________________________________________________
@@ -64,19 +63,14 @@ ________________________________________________________________________________
 
 Endpoints: 
 
-Сервис пациентов:
-
 Создание пациента:
 
 ![image](https://github.com/MMMMr1/intensive/assets/95496893/beb5ce78-df3c-40b2-b068-2125829855d5)
-
-
 ![image](https://github.com/MMMMr1/intensive/assets/95496893/95890769-29a7-46cf-a63d-4d91a654e5d3)
 
 Внесение изменений в данные пациента:
 
 <img width="310" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/27ab5b38-0719-4b0e-a016-0762a8dd68c6">
-
 <img width="308" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/684ef0f6-ec54-4d2a-96bb-509566efa4e3">
 
 Удаление пациента:
@@ -89,27 +83,21 @@ Endpoints:
 
 _____________________________________________________________________________
 
-Сервис врачей:
-
 Создание врача:
 
 <img width="314" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/a35bd60b-e920-48a0-883a-17219792a6b9">
-
-
 <img width="194" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/4d080003-7fa8-4643-a092-c6aa37777380">
  
 
 Внесение изменений в данные врача:
 
 <img width="302" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/b2b5e699-1f96-47c4-93ee-b2c8748b920c">
-
 <img width="194" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/4d080003-7fa8-4643-a092-c6aa37777380">
  
 
 Удаление врача:
 
 <img width="532" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/27c6f707-fdc0-4ff2-97e9-1889ce2eb58c">
-
  
 Получение данных всех врачей:
 
@@ -120,14 +108,11 @@ _____________________________________________________________________________
 Создание карты истории болезни:
 
 ![image](https://github.com/MMMMr1/intensive/assets/95496893/19593231-a46e-47ac-9c42-d3e503502e17)
-
-
 <img width="347" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/0b742ace-e2bf-414e-b5a1-4a77c2084a0a">
 
 Внесение изменение в карточку истории болезни:
 
 <img width="331" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/6a43b66d-7dde-4fa5-8478-268cb0cbd937">
-
 <img width="334" alt="image" src="https://github.com/MMMMr1/intensive/assets/95496893/27ea9f46-5a87-448e-b8ff-d602773ee35b">
 
 
