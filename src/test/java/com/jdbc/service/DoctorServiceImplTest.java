@@ -1,10 +1,14 @@
 package com.jdbc.service;
 
+import com.jdbc.dao.api.DoctorDao;
 import com.jdbc.dto.doctor.DoctorCreateDto;
 import com.jdbc.dto.doctor.DoctorEditDto;
 import com.jdbc.dto.doctor.DoctorReadDto;
 import com.jdbc.service.api.DoctorService;
 import com.jdbc.service.fabrics.DoctorServiceSingleton;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.beans.PropertyVetoException;
@@ -15,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class DoctorServiceImplTest {
 
     private DoctorService service;
+    private UUID testUuid;
+    private UUID testUuidDeleted;
 
     {
         try {
@@ -23,8 +29,8 @@ class DoctorServiceImplTest {
             throw new RuntimeException(e);
         }
     }
-    @Test
-    void test_WithValid_Data_create() {
+    @BeforeEach
+    void init() {
         DoctorCreateDto doctorCreateDto = new DoctorCreateDto(
                 "TestPatient",
                 "TestPatient",
@@ -32,13 +38,22 @@ class DoctorServiceImplTest {
                 "TestPatient",
                 "TestPatient"
         );
-        service.create(doctorCreateDto);
+        testUuid = service.create(doctorCreateDto);
+
+        DoctorCreateDto doctorDeleted = new DoctorCreateDto(
+                "TestPatient",
+                "TestPatient",
+                "TestPatient",
+                "TestPatient",
+                "TestPatient"
+        );
+        testUuidDeleted = service.create(doctorDeleted);
     }
 
     @Test
     void test_WithRightUUID_findDoctorById() {
-        UUID uuid =UUID.fromString("e25ceaef-5cf0-4312-b60c-37f85521c50a");
-        assertFalse( service.findDoctorById(uuid).isEmpty());
+
+        assertFalse( service.findDoctorById(testUuid).isEmpty());
     }
     @Test
     void test_WithWrongUUID_findPatientById() {
@@ -48,16 +63,14 @@ class DoctorServiceImplTest {
 
     @Test
     void test_WithRightUUID_delete() {
-        UUID uuid =UUID.fromString("b0188c23-b6a9-4bcf-b21e-2fa5a1efcc8c");
-        assertFalse( service.findDoctorById(uuid).isEmpty());
-        service.delete(uuid);
-        assertTrue( service.findDoctorById(uuid).isEmpty());
+        assertFalse( service.findDoctorById(testUuidDeleted).isEmpty());
+        service.delete(testUuidDeleted);
+        assertTrue( service.findDoctorById(testUuidDeleted).isEmpty());
     }
 
     @Test
     void test_WithRightUUID_update() {
-        UUID uuid =UUID.fromString("e25ceaef-5cf0-4312-b60c-37f85521c50a");
-        DoctorReadDto doctorById = service.findDoctorById(uuid).get();
+        DoctorReadDto doctorById = service.findDoctorById(testUuid).get();
         DoctorEditDto doctor = new DoctorEditDto(
                 doctorById.getId(),
                 doctorById.getLastName(),
@@ -67,11 +80,12 @@ class DoctorServiceImplTest {
                 "терапевтическое"
 
         );
-        service.update(uuid,doctor);
-        assertEquals(doctor.getPosition(), service.findDoctorById(uuid).get().getPosition());
+        service.update(testUuid,doctor);
+        assertEquals(doctor.getPosition(), service.findDoctorById(testUuid).get().getPosition());
     }
     @Test
     void test_NotEmpty_findAll() {
         assertFalse(service.findAll().isEmpty());
     }
+
 }
