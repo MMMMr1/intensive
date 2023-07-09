@@ -1,6 +1,5 @@
 package com.jdbc.service;
 
-import com.jdbc.dto.doctor.DoctorCreateDto;
 import com.jdbc.dto.patient.PatientCreateDto;
 import com.jdbc.dto.patient.PatientEditDto;
 import com.jdbc.dto.patient.PatientReadDto;
@@ -10,7 +9,7 @@ import com.jdbc.service.fabrics.PatientServiceSingleton;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -95,5 +94,10 @@ class PatientServiceImplTest {
     @Test
     void test_NotEmpty_findAll() {
         assertFalse(service.findAll().isEmpty());
+    }
+    @AfterEach
+    public void down(){
+        service.delete(testUuid);
+        service.delete(testUuidDeleted);
     }
 }

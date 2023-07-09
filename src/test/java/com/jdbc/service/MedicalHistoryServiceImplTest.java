@@ -11,7 +11,7 @@ import com.jdbc.service.api.PatientService;
 import com.jdbc.service.fabrics.DoctorServiceSingleton;
 import com.jdbc.service.fabrics.MedicalHistoryServiceSingleton;
 import com.jdbc.service.fabrics.PatientServiceSingleton;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,8 +25,10 @@ class MedicalHistoryServiceImplTest {
     private MedicalHistoryService service;
     private DoctorService doctorService;
     private PatientService patientService;
-    private static UUID testUuid;
-    private static UUID testUuidDeleted;
+    private UUID testUuid;
+    private UUID testUuidDeleted;
+    private UUID patient;
+    private UUID doctor;
 
     {
         try {
@@ -46,7 +48,7 @@ class MedicalHistoryServiceImplTest {
                 "TestPatient",
                 "TestPatient"
         );
-        UUID doctor = doctorService.create(doctorCreateDto);
+        doctor = doctorService.create(doctorCreateDto);
         PatientCreateDto createPatient = new PatientCreateDto(
                 "TestPatient",
                 "TestPatient",
@@ -55,7 +57,7 @@ class MedicalHistoryServiceImplTest {
                 "TestPatient",
                 "TestPatient"
         );
-        UUID patient = patientService.create(createPatient);
+        patient = patientService.create(createPatient);
         MedicalHistoryCreateDto createHistory = new MedicalHistoryCreateDto(
                 patient,
                 doctor,
@@ -69,6 +71,7 @@ class MedicalHistoryServiceImplTest {
                 "dddddd");
         testUuidDeleted = service.create(createHistory);
     }
+
 
     @Test
     void test_WithRightUUID_findMedicalHistoryById() {
@@ -103,5 +106,12 @@ class MedicalHistoryServiceImplTest {
         assertFalse( service.findMedicalHistoryById(testUuidDeleted).isEmpty());
         service.delete(testUuidDeleted);
         assertTrue( service.findMedicalHistoryById(testUuidDeleted).isEmpty());
+    }
+    @AfterEach
+    public void down(){
+        service.delete(testUuid);
+        service.delete(testUuidDeleted);
+        patientService.delete(patient);
+        doctorService.delete(doctor);
     }
 }

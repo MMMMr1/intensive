@@ -41,7 +41,6 @@ public class DoctorDaoImpl implements DoctorDao {
             preparedStatement.setObject(7, doctor.getDtCreated());
             preparedStatement.setObject(8, doctor.getDtUpdated());
             ResultSet resultSet = preparedStatement.executeQuery();
-
             while (resultSet.next()) {
                 uuid = (UUID) resultSet.getObject("uuid");
             }

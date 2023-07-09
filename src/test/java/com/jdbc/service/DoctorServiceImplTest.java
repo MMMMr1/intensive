@@ -1,13 +1,13 @@
 package com.jdbc.service;
 
-import com.jdbc.dao.api.DoctorDao;
 import com.jdbc.dto.doctor.DoctorCreateDto;
 import com.jdbc.dto.doctor.DoctorEditDto;
 import com.jdbc.dto.doctor.DoctorReadDto;
 import com.jdbc.service.api.DoctorService;
 import com.jdbc.service.fabrics.DoctorServiceSingleton;
+import org.junit.*;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -50,6 +50,7 @@ class DoctorServiceImplTest {
         testUuidDeleted = service.create(doctorDeleted);
     }
 
+
     @Test
     void test_WithRightUUID_findDoctorById() {
 
@@ -86,6 +87,11 @@ class DoctorServiceImplTest {
     @Test
     void test_NotEmpty_findAll() {
         assertFalse(service.findAll().isEmpty());
+    }
+    @AfterEach
+    public void down(){
+        service.delete(testUuid);
+        service.delete(testUuidDeleted);
     }
 
 }

@@ -5,14 +5,14 @@ CREATE SCHEMA IF NOT EXISTS app
 CREATE TABLE IF NOT EXISTS app.patients
 (
     uuid uuid NOT NULL,
-    lastname text COLLATE pg_catalog."default" NOT NULL,
-    firstname text COLLATE pg_catalog."default" NOT NULL,
-    surname text COLLATE pg_catalog."default",
-    address text COLLATE pg_catalog."default" NOT NULL,
-    phone text COLLATE pg_catalog."default",
-    medical_card_number text COLLATE pg_catalog."default",
+    lastname VARCHAR(30) NOT NULL,
+    firstname VARCHAR(20) NOT NULL,
+    surname VARCHAR(30) NOT NULL,
+    address VARCHAR(80) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    medical_card_number VARCHAR(30) NOT NULL,
     dt_created timestamp without time zone NOT NULL,
-    dt_updated timestamp without time zone,
+    dt_updated timestamp without time zone NOT NULL,
     CONSTRAINT patients_pkey PRIMARY KEY (uuid)
 )
 
@@ -20,11 +20,11 @@ CREATE TABLE IF NOT EXISTS app.patients
 CREATE TABLE IF NOT EXISTS app.doctors
 (
     uuid uuid NOT NULL,
-    lastname text COLLATE pg_catalog."default" NOT NULL,
-    firstname text COLLATE pg_catalog."default" NOT NULL,
-    surname text COLLATE pg_catalog."default" NOT NULL,
-    "position" text COLLATE pg_catalog."default" NOT NULL,
-    department text COLLATE pg_catalog."default" NOT NULL,
+    lastname VARCHAR(30) NOT NULL,
+    firstname VARCHAR(20) NOT NULL,
+    surname VARCHAR(30) NOT NULL,
+    position VARCHAR(60) NOT NULL,
+    department VARCHAR(60) NOT NULL,
     dt_created timestamp without time zone,
     dt_updated timestamp without time zone,
     CONSTRAINT doctors_pkey PRIMARY KEY (uuid)
@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS app.doctors
 CREATE TABLE IF NOT EXISTS app.medical_histories
 (
     uuid uuid NOT NULL,
-    diagnosis text COLLATE pg_catalog."default" NOT NULL,
-    treatment text COLLATE pg_catalog."default" NOT NULL,
+    diagnosis VARCHAR(100) NOT NULL,
+    treatment VARCHAR(500) NOT NULL,
     dt_created timestamp without time zone NOT NULL,
     dt_updated timestamp without time zone NOT NULL,
     id_patient uuid,

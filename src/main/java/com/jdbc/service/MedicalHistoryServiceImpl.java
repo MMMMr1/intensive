@@ -58,7 +58,7 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
             return uuid;
         } catch (RuntimeException e) {
             transaction.rollback();
-            throw new RuntimeException(e);
+            throw new RuntimeException("Transaction create rollback"+ e.getMessage());
         } finally {
             transaction.endTransaction();
         }
@@ -80,7 +80,7 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
             transaction.commit();
         } catch (RuntimeException e) {
             transaction.rollback();
-            throw new RuntimeException(e);
+            throw new RuntimeException("Transaction delete rollback"+ e.getMessage());
         } finally {
             transaction.endTransaction();
         }
@@ -98,7 +98,7 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
             transaction.commit();
         } catch (RuntimeException e) {
             transaction.rollback();
-            throw new RuntimeException(e);
+            throw new RuntimeException("Transaction update rollback"+ e.getMessage());
         } finally {
             transaction.endTransaction();
         }
