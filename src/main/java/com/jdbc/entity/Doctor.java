@@ -1,10 +1,12 @@
 package com.jdbc.entity;
 
 
+import javax.persistence.Entity;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class Doctor implements Entity {
+@Entity
+public class Doctor {
     private UUID id;
     private String lastName;
     private String firstName;

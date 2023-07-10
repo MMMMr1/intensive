@@ -2,7 +2,7 @@ package com.jdbc.dao.fabric;
 
 import com.jdbc.dao.DoctorDaoImpl;
 import com.jdbc.dao.api.DoctorDao;
-import com.jdbc.db.fabric.DataSourceSingleton;
+import com.jdbc.orm.fabrics.SessionFactorySingleton;
 
 import java.beans.PropertyVetoException;
 
@@ -16,7 +16,7 @@ public class DoctorDaoSingleton {
         if (instance == null) {
             synchronized (DoctorDaoSingleton.class) {
                 if (instance == null) {
-                    instance = new DoctorDaoImpl(DataSourceSingleton.getInstance());
+                    instance = new DoctorDaoImpl(SessionFactorySingleton.getInstance());
                 }
             }
         }

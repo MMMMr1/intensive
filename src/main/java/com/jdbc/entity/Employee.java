@@ -1,4 +1,4 @@
 package com.jdbc.entity;
 
-public interface Entity {
+public interface Employee {
 }

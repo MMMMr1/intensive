@@ -2,7 +2,7 @@ package com.jdbc.dao.fabric;
 
 import com.jdbc.dao.MedicalHistoryDaoImpl;
 import com.jdbc.dao.api.MedicalHistoryDao;
-import com.jdbc.db.fabric.DataSourceSingleton;
+import com.jdbc.orm.fabrics.SessionFactorySingleton;
 
 import java.beans.PropertyVetoException;
 
@@ -16,7 +16,7 @@ public class MedicalHistoryDaoSingleton {
         if (instance == null) {
             synchronized (MedicalHistoryDaoSingleton.class) {
                 if (instance == null) {
-                    instance = new MedicalHistoryDaoImpl(DataSourceSingleton.getInstance());
+                    instance = new MedicalHistoryDaoImpl(SessionFactorySingleton.getInstance());
                 }
             }
         }

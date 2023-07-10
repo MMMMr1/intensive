@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 
-public class MedicalHistory implements Entity {
+public class MedicalHistory  {
     private UUID uuid;
     private UUID patient;
     private UUID doctor;

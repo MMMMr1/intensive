@@ -2,62 +2,56 @@ package com.jdbc.dao;
 
 
 import com.jdbc.dao.api.Transactional;
-import com.jdbc.db.fabric.DataSourceSingleton;
+import com.jdbc.orm.SessionManager;
+import com.jdbc.orm.fabrics.SessionFactorySingleton;
+import org.hibernate.Session;
 
-import java.beans.PropertyVetoException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.logging.Logger;
 
 public class EntityTransaction {
-    private Connection connection;
+    private SessionManager sessionManager;
+    private Session session;
     Logger log = Logger.getLogger(EntityTransaction.class.getName());
     public void initTransaction(Transactional dao, Transactional... daos){
-        if (connection == null){
+        if (session == null){
             try {
-                connection = DataSourceSingleton.getInstance().getConnection();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (PropertyVetoException e) {
+                session = SessionFactorySingleton.getInstance().getSession();
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
         try {
-            connection.setAutoCommit(false);
-        } catch (SQLException e) {
+            session.beginTransaction();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        dao.setConnection(connection);
+        dao.setSession(session);
         for (Transactional daoElements : daos){
-            daoElements.setConnection(connection);
+            daoElements.setSession(session);
         }
     }
     public void endTransaction(){
-        if (connection == null){
+        if (session == null){
             throw new RuntimeException("Connection is null");
         }
+
         try {
-            connection.setAutoCommit(true);
-        } catch (SQLException e) {
-            log.info("Impossible setAutoCommit to true ");
-        }
-        try {
-            connection.close();
-        } catch (SQLException e) {
+            session.close();
+        } catch (Exception e) {
             log.info("Impossible close connection " + e.getMessage());
         }
     }
     public void commit(){
         try {
-            connection.commit();
-        } catch (SQLException e) {
+            session.getTransaction().commit();
+        } catch (Exception e) {
             log.info("Impossible commit "+ e.getMessage());
         }
     }
     public void rollback(){
         try {
-            connection.rollback();
-        } catch (SQLException e) {
+            session.getTransaction().rollback();
+        } catch (Exception e) {
             log.info("Impossible rollback  "+ e.getMessage());
 
         }
