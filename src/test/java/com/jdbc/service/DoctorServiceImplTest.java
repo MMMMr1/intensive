@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DoctorServiceImplTest {
     private DoctorService service;
-    private UUID testUuid;
-    private UUID testUuidDeleted;
+    private Long testUuid;
+    private Long testUuidDeleted;
     {
         try {
             service = DoctorServiceSingleton.getInstance();
@@ -40,8 +40,8 @@ class DoctorServiceImplTest {
     }
     @Test
     void test_WithWrongUUID_findPatientById() {
-        UUID wrongUuid =UUID.fromString("0171cb42-e21f-46db-aba7-c4b9107df991");
-        assertTrue(service.findDoctorById(wrongUuid).isEmpty());
+//        UUID wrongUuid =Long.fromString("0171cb42-e21f-46db-aba7-c4b9107df991");
+        assertTrue(service.findDoctorById(222222222L).isEmpty());
     }
     @Test
     void test_WithRightUUID_delete() {

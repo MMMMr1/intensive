@@ -18,7 +18,7 @@ public class DoctorDaoImpl implements DoctorDao {
     }
 
     @Override
-    public UUID create(Doctor doctor) {
+    public Long create(Doctor doctor) {
         try {
             session.persist(doctor);
             return doctor.getId();
@@ -30,8 +30,8 @@ public class DoctorDaoImpl implements DoctorDao {
     }
 
     @Override
-    public void update(UUID uuid, Doctor doctor) {
-        log.info("update "+ uuid);
+    public void update(Long id, Doctor doctor) {
+        log.info("update "+ id);
         try {
             session.update(doctor);
         } catch (Exception e) {
@@ -41,10 +41,10 @@ public class DoctorDaoImpl implements DoctorDao {
     }
 
     @Override
-    public void delete(UUID uuid) {
-        log.info("delete "+ uuid);
+    public void delete(Long id) {
+        log.info("delete "+ id);
         try {
-            Doctor doctor = session.load(Doctor.class, uuid);
+            Doctor doctor = session.load(Doctor.class, id);
             session.delete(doctor);
             session.flush();
         } catch (Exception e) {
@@ -67,9 +67,9 @@ public class DoctorDaoImpl implements DoctorDao {
     }
 
     @Override
-    public Optional<Doctor> findDoctorById(UUID uuid) {
+    public Optional<Doctor> findDoctorById(Long id) {
         try (Session session = sessionManager.getSession()) {
-            Doctor doctor = session.get(Doctor.class, uuid);
+            Doctor doctor = session.get(Doctor.class, id);
             return Optional.ofNullable(doctor);
         } catch (Exception e) {
             e.printStackTrace();

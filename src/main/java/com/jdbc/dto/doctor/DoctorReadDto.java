@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class DoctorReadDto {
-    private UUID id;
+    private Long id;
     private String lastName;
     private String firstName;
     private String surName;
@@ -16,7 +16,7 @@ public class DoctorReadDto {
     public DoctorReadDto() {
     }
 
-    public DoctorReadDto(UUID id, String lastName, String firstName, String surName, String position, String department, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
+    public DoctorReadDto(Long id, String lastName, String firstName, String surName, String position, String department, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -27,11 +27,11 @@ public class DoctorReadDto {
         this.dtUpdated = dtUpdated;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

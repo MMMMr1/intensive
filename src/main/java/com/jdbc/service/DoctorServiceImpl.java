@@ -30,14 +30,14 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public UUID create(DoctorCreateDto doctorCreateDto) {
+    public Long create(DoctorCreateDto doctorCreateDto) {
 //        Transactional
         EntityTransaction transaction = new EntityTransaction();
         transaction.initTransaction(dao);
-        UUID uuid;
+        Long uuid;
         try {
             Doctor doctor = createMapper.map(doctorCreateDto);
-            doctor.setId(UUID.randomUUID());
+//            doctor.setUuid(UUID.randomUUID());
             doctor.setDtCreated(LocalDateTime.now());
             doctor.setDtUpdated(LocalDateTime.now());
             uuid = dao.create(doctor);
@@ -52,13 +52,13 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Optional<DoctorReadDto> findDoctorById(UUID id) {
+    public Optional<DoctorReadDto> findDoctorById(Long id) {
         return dao.findDoctorById(id)
                 .map(readMapper::map);
     }
 
     @Override
-    public void delete(UUID uuid) {
+    public void delete(Long uuid) {
         checkUuid(uuid);
         //        Transactional
         EntityTransaction transaction = new EntityTransaction();
@@ -75,7 +75,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public void update(UUID uuid, DoctorEditDto patient) {
+    public void update(Long uuid, DoctorEditDto patient) {
         checkUuid(uuid);
         //        Transactional
         EntityTransaction transaction = new EntityTransaction();
@@ -99,7 +99,7 @@ public class DoctorServiceImpl implements DoctorService {
                 .map(readMapper::map)
                 .collect(Collectors.toList());
     }
-    private void checkUuid(UUID uuid){
-        if (uuid == null ) throw  new RuntimeException("invalid uuid "+ uuid);
+    private void checkUuid(Long uuid){
+        if (uuid <= 0 ) throw  new RuntimeException("invalid uuid "+ uuid);
     }
 }

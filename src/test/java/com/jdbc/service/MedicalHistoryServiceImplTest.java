@@ -28,7 +28,7 @@ class MedicalHistoryServiceImplTest {
     private UUID testUuid;
     private UUID testUuidDeleted;
     private UUID patient;
-    private UUID doctor;
+    private Long doctor;
 
     {
         try {

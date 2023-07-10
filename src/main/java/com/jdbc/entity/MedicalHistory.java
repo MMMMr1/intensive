@@ -10,10 +10,10 @@ import java.util.UUID;
 public class MedicalHistory  {
     @Id
     private UUID uuid;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_patient")
     private Patient patient;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_doctor")
     private Doctor doctor;
     @Column

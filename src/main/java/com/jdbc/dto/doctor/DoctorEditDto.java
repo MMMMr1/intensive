@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
 
 public class DoctorEditDto {
-    @JsonProperty("uuid")
-    private UUID uuid;
+    @JsonProperty("id")
+    private Long uuid;
     @JsonProperty("lastName")
     private String lastName;
     @JsonProperty("firstName")
@@ -22,7 +22,7 @@ public class DoctorEditDto {
     public DoctorEditDto() {
     }
 
-    public DoctorEditDto(UUID uuid, String lastName, String firstName, String surName, String position, String department) {
+    public DoctorEditDto(Long uuid, String lastName, String firstName, String surName, String position, String department) {
         this.uuid = uuid;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -31,11 +31,11 @@ public class DoctorEditDto {
         this.department = department;
     }
 
-    public UUID getUuid() {
+    public Long getUuid() {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
+    public void setUuid(Long uuid) {
         this.uuid = uuid;
     }
 

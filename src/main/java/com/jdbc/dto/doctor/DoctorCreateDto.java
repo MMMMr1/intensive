@@ -14,11 +14,8 @@ public class DoctorCreateDto {
     private String position;
     @JsonProperty("department")
     private String department;
-
-
     public DoctorCreateDto() {
     }
-
     public DoctorCreateDto(String lastName, String firstName, String surName, String position, String department) {
         this.lastName = lastName;
         this.firstName = firstName;

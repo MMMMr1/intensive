@@ -62,7 +62,7 @@ public class DoctorServlet extends HttpServlet {
 
             PrintWriter writer = resp.getWriter();
             String uuidParam = req.getParameter("uuid");
-            UUID uuid = UUID.fromString(uuidParam);
+            Long uuid = Long.getLong(uuidParam);
             service.delete(uuid);
         }
 

@@ -11,10 +11,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface DoctorService {
-    UUID create ( DoctorCreateDto patient );
-    Optional<DoctorReadDto> findDoctorById(UUID id );
-    void delete(UUID uuid);
-    void update(UUID uuid, DoctorEditDto t);
+    Long create ( DoctorCreateDto patient );
+    Optional<DoctorReadDto> findDoctorById(Long id);
+    void delete(Long id);
+    void update(Long id, DoctorEditDto t);
     List<DoctorReadDto> findAll();
 
 
