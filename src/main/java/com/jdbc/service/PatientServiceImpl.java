@@ -61,6 +61,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public void delete(UUID uuid) {
+        checkUuid(uuid);
         //        Transactional
         EntityTransaction transaction = new EntityTransaction();
         transaction.initTransaction(dao);
@@ -77,6 +78,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public void update(UUID uuid, PatientEditDto patient) {
+        checkUuid(uuid);
         //        Transactional
         EntityTransaction transaction = new EntityTransaction();
         transaction.initTransaction(dao);
@@ -98,5 +100,8 @@ public class PatientServiceImpl implements PatientService {
         return dao.findAll().stream()
                 .map(readMapper::map)
                 .collect(Collectors.toList());
+    }
+    private void checkUuid(UUID uuid){
+        if (uuid == null ) throw  new RuntimeException("invalid uuid "+ uuid);
     }
 }

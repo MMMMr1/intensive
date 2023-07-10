@@ -9,11 +9,14 @@ import com.jdbc.entity.Doctor;
 import com.jdbc.mapper.mapper.*;
 import com.jdbc.service.api.DoctorService;
 
+import java.lang.reflect.Field;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DoctorServiceImpl implements DoctorService {
 
@@ -59,6 +62,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void delete(UUID uuid) {
+        checkUuid(uuid);
         //        Transactional
         EntityTransaction transaction = new EntityTransaction();
         transaction.initTransaction(dao);
@@ -75,6 +79,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void update(UUID uuid, DoctorEditDto patient) {
+        checkUuid(uuid);
         //        Transactional
         EntityTransaction transaction = new EntityTransaction();
         transaction.initTransaction(dao);
@@ -96,5 +101,8 @@ public class DoctorServiceImpl implements DoctorService {
         return dao.findAll().stream()
                 .map(readMapper::map)
                 .collect(Collectors.toList());
+    }
+    private void checkUuid(UUID uuid){
+        if (uuid == null ) throw  new RuntimeException("invalid uuid "+ uuid);
     }
 }
