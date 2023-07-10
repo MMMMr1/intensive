@@ -8,10 +8,8 @@ import java.beans.PropertyVetoException;
 
 public class MedicalHistoryDaoSingleton {
     private volatile static MedicalHistoryDaoImpl instance;
-
     private MedicalHistoryDaoSingleton() {
     }
-
     public static MedicalHistoryDao getInstance() throws PropertyVetoException {
         if (instance == null) {
             synchronized (MedicalHistoryDaoSingleton.class) {

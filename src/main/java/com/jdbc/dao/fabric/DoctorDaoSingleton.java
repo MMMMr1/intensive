@@ -11,7 +11,6 @@ public class DoctorDaoSingleton {
 
     private DoctorDaoSingleton() {
     }
-
     public static DoctorDao getInstance() throws PropertyVetoException {
         if (instance == null) {
             synchronized (DoctorDaoSingleton.class) {
