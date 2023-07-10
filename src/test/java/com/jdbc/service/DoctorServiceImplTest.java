@@ -5,11 +5,7 @@ import com.jdbc.dto.doctor.DoctorEditDto;
 import com.jdbc.dto.doctor.DoctorReadDto;
 import com.jdbc.service.api.DoctorService;
 import com.jdbc.service.fabrics.DoctorServiceSingleton;
-import org.junit.*;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.beans.PropertyVetoException;
 import java.util.UUID;
@@ -17,11 +13,9 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DoctorServiceImplTest {
-
     private DoctorService service;
     private UUID testUuid;
     private UUID testUuidDeleted;
-
     {
         try {
             service = DoctorServiceSingleton.getInstance();
@@ -39,7 +33,18 @@ class DoctorServiceImplTest {
                 "TestPatient"
         );
         testUuid = service.create(doctorCreateDto);
-
+    }
+    @Test
+    void test_WithRightUUID_findDoctorById() {
+        assertFalse( service.findDoctorById(testUuid).isEmpty());
+    }
+    @Test
+    void test_WithWrongUUID_findPatientById() {
+        UUID wrongUuid =UUID.fromString("0171cb42-e21f-46db-aba7-c4b9107df991");
+        assertTrue(service.findDoctorById(wrongUuid).isEmpty());
+    }
+    @Test
+    void test_WithRightUUID_delete() {
         DoctorCreateDto doctorDeleted = new DoctorCreateDto(
                 "TestPatient",
                 "TestPatient",
@@ -48,22 +53,6 @@ class DoctorServiceImplTest {
                 "TestPatient"
         );
         testUuidDeleted = service.create(doctorDeleted);
-    }
-
-
-    @Test
-    void test_WithRightUUID_findDoctorById() {
-
-        assertFalse( service.findDoctorById(testUuid).isEmpty());
-    }
-    @Test
-    void test_WithWrongUUID_findPatientById() {
-        UUID wrongUuid =UUID.fromString("0171cb42-e21f-46db-aba7-c4b9107df991");
-        assertTrue(service.findDoctorById(wrongUuid).isEmpty());
-    }
-
-    @Test
-    void test_WithRightUUID_delete() {
         assertFalse( service.findDoctorById(testUuidDeleted).isEmpty());
         service.delete(testUuidDeleted);
         assertTrue( service.findDoctorById(testUuidDeleted).isEmpty());
@@ -79,7 +68,6 @@ class DoctorServiceImplTest {
                 doctorById.getSurName(),
                 "отоларинголог",
                 "терапевтическое"
-
         );
         service.update(testUuid,doctor);
         assertEquals(doctor.getPosition(), service.findDoctorById(testUuid).get().getPosition());
@@ -91,7 +79,5 @@ class DoctorServiceImplTest {
     @AfterEach
     public void down(){
         service.delete(testUuid);
-        service.delete(testUuidDeleted);
     }
-
 }

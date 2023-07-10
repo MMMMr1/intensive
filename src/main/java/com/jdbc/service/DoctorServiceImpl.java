@@ -9,14 +9,11 @@ import com.jdbc.entity.Doctor;
 import com.jdbc.mapper.mapper.*;
 import com.jdbc.service.api.DoctorService;
 
-import java.lang.reflect.Field;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class DoctorServiceImpl implements DoctorService {
 

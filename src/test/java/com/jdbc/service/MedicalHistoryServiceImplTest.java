@@ -64,12 +64,6 @@ class MedicalHistoryServiceImplTest {
                 "GG2 - dkd",
                 "dddddd");
         testUuid = service.create(createHistory);
-        MedicalHistoryCreateDto historyDeleted = new MedicalHistoryCreateDto(
-                patient,
-                doctor,
-                "DDD - dkd",
-                "dddddd");
-        testUuidDeleted = service.create(createHistory);
     }
 
 
@@ -103,6 +97,12 @@ class MedicalHistoryServiceImplTest {
     }
     @Test
     void test_WithRightUUID_delete() {
+        MedicalHistoryCreateDto historyDeleted = new MedicalHistoryCreateDto(
+                patient,
+                doctor,
+                "DDD - dkd",
+                "dddddd");
+        testUuidDeleted = service.create(historyDeleted);
         assertFalse( service.findMedicalHistoryById(testUuidDeleted).isEmpty());
         service.delete(testUuidDeleted);
         assertTrue( service.findMedicalHistoryById(testUuidDeleted).isEmpty());
@@ -110,7 +110,6 @@ class MedicalHistoryServiceImplTest {
     @AfterEach
     public void down(){
         service.delete(testUuid);
-        service.delete(testUuidDeleted);
         patientService.delete(patient);
         doctorService.delete(doctor);
     }

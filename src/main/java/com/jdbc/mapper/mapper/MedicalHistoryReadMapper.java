@@ -11,8 +11,8 @@ public class MedicalHistoryReadMapper implements Mapper<MedicalHistory, MedicalH
     public MedicalHistoryReadDto map(MedicalHistory object) {
          return new MedicalHistoryReadDto(
                   object.getUuid(),
-                 object.getPatient(),
-                 object.getDoctor(),
+                 object.getPatient().getId(),
+                 object.getDoctor().getId(),
                  object.getDiagnosis(),
                  object.getTreatment(),
                  object.getDtCreated(),
