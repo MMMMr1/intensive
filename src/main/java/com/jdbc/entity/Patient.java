@@ -112,9 +112,18 @@ public class Patient {
     public void setDtUpdated(LocalDateTime dtUpdated) {
         this.dtUpdated = dtUpdated;
     }
-
     @Override
     public String toString() {
-        return super.toString();
+        return "Patient{" +
+                "uuid=" + uuid +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", surName='" + surName + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", medicalCardNumber='" + medicalCardNumber + '\'' +
+                ", dtCreated=" + dtCreated +
+                ", dtUpdated=" + dtUpdated +
+                '}';
     }
 }
