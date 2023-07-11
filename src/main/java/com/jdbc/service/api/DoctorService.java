@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface DoctorService {
-    Long create ( DoctorCreateDto patient );
+    Long create ( DoctorCreateDto doctor );
     Optional<DoctorReadDto> findDoctorById(Long id);
     void delete(Long id);
     void update(Long id, DoctorEditDto t);

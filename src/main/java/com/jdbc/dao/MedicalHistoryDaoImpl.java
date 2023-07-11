@@ -1,14 +1,11 @@
 package com.jdbc.dao;
 
 import com.jdbc.dao.api.MedicalHistoryDao;
-import com.jdbc.entity.Doctor;
 import com.jdbc.entity.MedicalHistory;
 import com.jdbc.orm.SessionManager;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Session;
 
-import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -72,7 +69,8 @@ public class MedicalHistoryDaoImpl implements MedicalHistoryDao {
     @Override
     public Optional<MedicalHistory> findMedicalHistoryById(UUID uuid) {
         try (Session session = sessionManager.getSession()) {
-            MedicalHistory medicalHistory = session.get(MedicalHistory.class, uuid);
+            MedicalHistory medicalHistory = session.createQuery("SELECT a FROM MedicalHistory a JOIN FETCH a.patient WHERE a.uuid = '" + uuid + "'", MedicalHistory.class).getSingleResult();
+//            MedicalHistory medicalHistory = session.get(MedicalHistory.class, uuid);
             return Optional.ofNullable(medicalHistory);
         } catch (Exception e) {
             e.printStackTrace();

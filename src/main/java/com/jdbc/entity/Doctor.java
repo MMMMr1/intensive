@@ -13,7 +13,9 @@ public class Doctor extends Employee {
     @Column
     private String department;
 
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "doctor",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private List<MedicalHistory> patients = new ArrayList<>();
 
 

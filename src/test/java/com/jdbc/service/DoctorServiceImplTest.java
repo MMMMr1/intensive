@@ -13,27 +13,27 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DoctorServiceImplTest {
-    private DoctorService service;
-    private Long testUuid;
-    private Long testUuidDeleted;
-    {
-        try {
-            service = DoctorServiceSingleton.getInstance();
-        } catch (PropertyVetoException e) {
-            throw new RuntimeException(e);
+        private DoctorService service;
+        private Long testUuid;
+        private Long testUuidDeleted;
+        {
+            try {
+                service = DoctorServiceSingleton.getInstance();
+            } catch (PropertyVetoException e) {
+                throw new RuntimeException(e);
+            }
         }
-    }
-    @BeforeEach
-    void init() {
-        DoctorCreateDto doctorCreateDto = new DoctorCreateDto(
-                "TestPatient",
-                "TestPatient",
-                "TestPatient",
-                "TestPatient",
-                "TestPatient"
-        );
-        testUuid = service.create(doctorCreateDto);
-    }
+        @BeforeEach
+        void init() {
+            DoctorCreateDto doctorCreateDto = new DoctorCreateDto(
+                    "TestPatient",
+                    "TestPatient",
+                    "TestPatient",
+                    "TestPatient",
+                    "TestPatient"
+            );
+            testUuid = service.create(doctorCreateDto);
+        }
     @Test
     void test_WithRightUUID_findDoctorById() {
         assertFalse( service.findDoctorById(testUuid).isEmpty());

@@ -77,6 +77,7 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
 
     @Override
     public Optional<MedicalHistoryReadDto> findMedicalHistoryById(UUID id) {
+        checkUuid(id);
         return dao.findMedicalHistoryById(id)
                 .map(readMapper::map);
     }
@@ -139,6 +140,6 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
                 .collect(Collectors.toList());
     }
     private void checkUuid(UUID uuid){
-        if (uuid == null ) throw  new RuntimeException("invalid uuid "+ uuid);
+        if (uuid == null) throw  new RuntimeException("invalid uuid "+ uuid);
     }
 }

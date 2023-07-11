@@ -15,6 +15,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.persistence.NoResultException;
 import java.beans.PropertyVetoException;
 import java.util.UUID;
 
@@ -69,12 +70,14 @@ class MedicalHistoryServiceImplTest {
 
     @Test
     void test_WithRightUUID_findMedicalHistoryById() {
-        assertFalse( service.findMedicalHistoryById(testUuid).isEmpty());
+        assertTrue( service.findMedicalHistoryById(testUuid).isPresent());
     }
     @Test
     void test_WithWrongUUID_findMedicalHistoryById() {
         UUID wrongUuid =UUID.fromString("0171cb42-e21f-46db-aba7-c4b9107df991");
-        assertTrue(service.findMedicalHistoryById(wrongUuid).isEmpty());
+        assertThrows(NoResultException.class,() ->
+                service.findMedicalHistoryById(wrongUuid));
+
     }
 
     @Test

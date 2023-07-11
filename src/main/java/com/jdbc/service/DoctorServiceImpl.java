@@ -37,7 +37,6 @@ public class DoctorServiceImpl implements DoctorService {
         Long uuid;
         try {
             Doctor doctor = createMapper.map(doctorCreateDto);
-//            doctor.setUuid(UUID.randomUUID());
             doctor.setDtCreated(LocalDateTime.now());
             doctor.setDtUpdated(LocalDateTime.now());
             uuid = dao.create(doctor);

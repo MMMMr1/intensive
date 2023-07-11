@@ -22,7 +22,9 @@ public class Patient {
     private String phone;
     @Column(name = "medical_card_number")
     private String medicalCardNumber;
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private Set <MedicalHistory> medicalHistories = new HashSet<>();
     @Column(name = "dt_created")
     private LocalDateTime dtCreated;
