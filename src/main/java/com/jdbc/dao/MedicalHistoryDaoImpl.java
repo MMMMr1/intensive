@@ -70,8 +70,7 @@ public class MedicalHistoryDaoImpl implements MedicalHistoryDao {
     public Optional<MedicalHistory> findMedicalHistoryById(UUID uuid) {
         try (Session session = sessionManager.getSession()) {
             MedicalHistory medicalHistory = session.createQuery("SELECT a FROM MedicalHistory a JOIN FETCH a.patient WHERE a.uuid = '" + uuid + "'", MedicalHistory.class).getSingleResult();
-//            MedicalHistory medicalHistory = session.get(MedicalHistory.class, uuid);
-            return Optional.ofNullable(medicalHistory);
+           return Optional.ofNullable(medicalHistory);
         } catch (Exception e) {
             e.printStackTrace();
             throw e;

@@ -1,10 +1,7 @@
 package com.jdbc.orm;
 
 
-import com.jdbc.entity.Doctor;
-import com.jdbc.entity.MedicalHistory;
-import com.jdbc.entity.Nurse;
-import com.jdbc.entity.Patient;
+import com.jdbc.entity.*;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,6 +20,7 @@ public class SessionManager {
         configuration.addAnnotatedClass(Doctor.class);
         configuration.addAnnotatedClass(MedicalHistory.class);
         configuration.addAnnotatedClass(Nurse.class);
+        configuration.addAnnotatedClass(Employee.class);
         configuration.configure();
         this.sessionFactory = configuration.buildSessionFactory();
     }
