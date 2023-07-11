@@ -1,6 +1,5 @@
 package com.jdbc.dto.doctor;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DoctorCreateDto {

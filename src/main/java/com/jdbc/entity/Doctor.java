@@ -1,11 +1,8 @@
 package com.jdbc.entity;
 
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "app.doctors")
@@ -15,14 +12,9 @@ public class Doctor extends Employee {
     private String position;
     @Column
     private String department;
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            schema = "app",
-            name = "doctors_patients",
-            joinColumns = { @JoinColumn(name = "doctor_id") },
-            inverseJoinColumns = { @JoinColumn(name = "patient_uuid") }
-    )
-    private Set<Patient> patients;
+
+    @OneToMany(mappedBy = "doctor")
+    private List<MedicalHistory> patients = new ArrayList<>();
 
 
     public Doctor() {
@@ -33,8 +25,6 @@ public class Doctor extends Employee {
         this.position = position;
         this.department = department;
     }
-
-
     public String getPosition() {
         return position;
     }
@@ -48,4 +38,11 @@ public class Doctor extends Employee {
         this.department = department;
     }
 
+    public List<MedicalHistory> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(List<MedicalHistory> patients) {
+        this.patients = patients;
+    }
 }

@@ -60,7 +60,7 @@ public class MedicalHistoryDaoImpl implements MedicalHistoryDao {
     public List<MedicalHistory> findAll() {
         try (Session session = sessionManager.getSession()) {
             session.getTransaction().begin();
-            List<MedicalHistory> list = session.createQuery("FROM MedicalHistory", MedicalHistory.class).getResultList();
+            List<MedicalHistory> list = session.createQuery("SELECT a FROM MedicalHistory a JOIN FETCH a.patient", MedicalHistory.class).getResultList();
             session.getTransaction().commit();
             return list;
         } catch (Exception e) {

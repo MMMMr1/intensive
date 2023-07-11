@@ -24,7 +24,6 @@ public class Employee {
 
     public Employee() {
     }
-
     public Employee(Long id, String lastName, String firstName, String surName, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
         this.id = id;
         this.lastName = lastName;

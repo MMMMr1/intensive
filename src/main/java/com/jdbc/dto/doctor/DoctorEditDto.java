@@ -1,6 +1,5 @@
 package com.jdbc.dto.doctor;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.UUID;

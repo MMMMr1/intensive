@@ -11,10 +11,10 @@ public class MedicalHistory  {
     @Id
     private UUID uuid;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_patient")
+    @JoinColumn(name = "patient_uuid")
     private Patient patient;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_doctor")
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
     @Column
     private String diagnosis;
