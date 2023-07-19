@@ -16,6 +16,7 @@ public class DoctorEntityMapper implements Mapper<DoctorReadDto, Doctor> {
                  object.getSurName(),
                  object.getPosition(),
                  object.getDepartment(),
+                 object.getWorkHours(),
                  object.getDtCreated(),
                  object.getDtUpdated()
         );

@@ -10,19 +10,22 @@ public class DoctorReadDto {
     private String surName;
     private String position;
     private String department;
+    private Integer workHours;
     private LocalDateTime dtCreated;
     private LocalDateTime dtUpdated;
 
     public DoctorReadDto() {
     }
 
-    public DoctorReadDto(Long id, String lastName, String firstName, String surName, String position, String department, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
+
+    public DoctorReadDto(Long id, String lastName, String firstName, String surName, String position, String department, Integer workHours, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
         this.surName = surName;
         this.position = position;
         this.department = department;
+        this.workHours = workHours;
         this.dtCreated = dtCreated;
         this.dtUpdated = dtUpdated;
     }
@@ -89,5 +92,13 @@ public class DoctorReadDto {
 
     public void setDtUpdated(LocalDateTime dtUpdated) {
         this.dtUpdated = dtUpdated;
+    }
+
+    public Integer getWorkHours() {
+        return workHours;
+    }
+
+    public void setWorkHours(Integer workHours) {
+        this.workHours = workHours;
     }
 }

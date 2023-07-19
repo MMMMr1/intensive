@@ -12,7 +12,6 @@ import com.jdbc.service.api.DoctorService;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class DoctorServiceImpl implements DoctorService {
@@ -100,5 +99,6 @@ public class DoctorServiceImpl implements DoctorService {
     }
     private void checkUuid(Long uuid){
         if (uuid <= 0 ) throw  new RuntimeException("invalid uuid "+ uuid);
+        dao.findDoctorById(uuid).orElseThrow(() -> new RuntimeException("such uuid " + uuid + " is not exist"));
     }
 }

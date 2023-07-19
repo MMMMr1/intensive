@@ -1,12 +1,15 @@
 package com.jdbc.entity;
 
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(schema = "app", name = "employees")
 @Inheritance(strategy = InheritanceType.JOINED)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

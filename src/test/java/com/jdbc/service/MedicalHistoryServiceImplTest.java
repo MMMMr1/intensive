@@ -15,7 +15,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.persistence.NoResultException;
+import javax.persistence.*;
 import java.beans.PropertyVetoException;
 import java.util.UUID;
 

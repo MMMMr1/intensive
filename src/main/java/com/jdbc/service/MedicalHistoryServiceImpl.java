@@ -2,8 +2,6 @@ package com.jdbc.service;
 
 import com.jdbc.dao.EntityTransaction;
 import com.jdbc.dao.api.MedicalHistoryDao;
-import com.jdbc.dto.doctor.DoctorReadDto;
-import com.jdbc.dto.patient.PatientReadDto;
 import com.jdbc.dto.medical_history.MedicalHistoryCreateDto;
 import com.jdbc.dto.medical_history.MedicalHistoryEditDto;
 import com.jdbc.dto.medical_history.MedicalHistoryReadDto;
@@ -23,7 +21,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class MedicalHistoryServiceImpl implements MedicalHistoryService {
-
     private final MedicalHistoryDao dao;
     private final DoctorService doctorService;
     private final PatientService patientService;
@@ -33,7 +30,9 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
     private final DoctorEntityMapper doctorEntityMapper;
     private final PatientEntityMapper patientEntityMapper;
 
-    public MedicalHistoryServiceImpl(MedicalHistoryDao dao, DoctorService doctorService, PatientService patientService ) {
+    public MedicalHistoryServiceImpl(MedicalHistoryDao dao,
+                                     DoctorService doctorService,
+                                     PatientService patientService ) {
         this.dao = dao;
         this.doctorService = doctorService;
         this.patientService = patientService;
@@ -141,5 +140,7 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
     }
     private void checkUuid(UUID uuid){
         if (uuid == null) throw  new RuntimeException("invalid uuid "+ uuid);
+        dao.findMedicalHistoryById(uuid).orElseThrow(() -> new RuntimeException("such uuid " + uuid + " is not exist"));
+
     }
 }

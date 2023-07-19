@@ -103,5 +103,7 @@ public class PatientServiceImpl implements PatientService {
     }
     private void checkUuid(UUID uuid){
         if (uuid == null ) throw  new RuntimeException("invalid uuid "+ uuid);
+        dao.findPatientById(uuid).orElseThrow(() -> new RuntimeException("such uuid " + uuid + " is not exist"));
+
     }
 }

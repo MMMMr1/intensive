@@ -7,6 +7,7 @@ import com.jdbc.entity.Patient;
 import com.jdbc.orm.SessionManager;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Session;
+import org.hibernate.stat.Statistics;
 
 import java.util.*;
 @Log4j2
@@ -77,6 +78,20 @@ public class DoctorDaoImpl implements DoctorDao {
             throw e;
         }
     }
+
+
+    public List<Doctor> findDoctorByWorkHours(Integer minWorkHours) {
+        try (Session session = sessionManager.getSession()) {
+            session.getTransaction().begin();
+            List<Doctor> list = session.createQuery("FROM Doctor  WHERE  workHours > "+minWorkHours, Doctor.class).getResultList();
+            session.getTransaction().commit();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
     @Override
     public void setSession(Session session) {
         this.session = session;

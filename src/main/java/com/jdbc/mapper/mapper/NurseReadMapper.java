@@ -1,22 +1,22 @@
 package com.jdbc.mapper.mapper;
 
-import com.jdbc.dto.doctor.DoctorReadDto;
-import com.jdbc.entity.Doctor;
+import com.jdbc.dto.nurse.NurseReadDto;
+import com.jdbc.entity.Nurse;
 import com.jdbc.mapper.Mapper;
 
 
-public class DoctorReadMapper implements Mapper<Doctor, DoctorReadDto> {
+public class NurseReadMapper implements Mapper<Nurse, NurseReadDto> {
 
     @Override
-    public DoctorReadDto map(Doctor object) {
-         return new DoctorReadDto(
+    public NurseReadDto map(Nurse object) {
+         return new NurseReadDto(
                 object.getId(),
                  object.getLastName(),
                  object.getFirstName(),
                  object.getSurName(),
                  object.getPosition(),
-                 object.getDepartment(),
-                 object.getWorkHours(),
+                 object.getBlockfloor(),
+                 object.getBlockcode(),
                  object.getDtCreated(),
                  object.getDtUpdated()
         );

@@ -2,7 +2,9 @@ package com.jdbc.dto.nurse;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class NurseCreateDto {
+public class NurseEditDto {
+    @JsonProperty("id")
+    private Long uuid;
     @JsonProperty("lastName")
     private String lastName;
     @JsonProperty("firstName")
@@ -15,16 +17,31 @@ public class NurseCreateDto {
     private String blockfloor;
     @JsonProperty("blockcode")
     private String blockcode;
-    public NurseCreateDto() {
+    public NurseEditDto() {
     }
 
-    public NurseCreateDto(String lastName, String firstName, String surName, String position, String blockfloor, String blockcode) {
+    public NurseEditDto(Long uuid,
+                        String lastName,
+                        String firstName,
+                        String surName,
+                        String position,
+                        String blockfloor,
+                        String blockcode) {
+        this.uuid = uuid;
         this.lastName = lastName;
         this.firstName = firstName;
         this.surName = surName;
         this.position = position;
         this.blockfloor = blockfloor;
         this.blockcode = blockcode;
+    }
+
+    public Long getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(Long uuid) {
+        this.uuid = uuid;
     }
 
     public String getLastName() {

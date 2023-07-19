@@ -2,29 +2,47 @@ package com.jdbc.dto.nurse;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class NurseCreateDto {
-    @JsonProperty("lastName")
+import java.time.LocalDateTime;
+
+public class NurseReadDto {
+    private Long uuid;
     private String lastName;
-    @JsonProperty("firstName")
     private String firstName;
-    @JsonProperty("surName")
     private String surName;
-    @JsonProperty("position")
     private String position;
-    @JsonProperty("blockfloor")
     private String blockfloor;
-    @JsonProperty("blockcode")
     private String blockcode;
-    public NurseCreateDto() {
+    private LocalDateTime dtCreated;
+    private LocalDateTime dtUpdated;
+    public NurseReadDto() {
     }
 
-    public NurseCreateDto(String lastName, String firstName, String surName, String position, String blockfloor, String blockcode) {
+    public NurseReadDto(Long uuid,
+                        String lastName,
+                        String firstName,
+                        String surName,
+                        String position,
+                        String blockfloor,
+                        String blockcode,
+                        LocalDateTime dtCreated,
+                        LocalDateTime dtUpdated) {
+        this.uuid = uuid;
         this.lastName = lastName;
         this.firstName = firstName;
         this.surName = surName;
         this.position = position;
         this.blockfloor = blockfloor;
         this.blockcode = blockcode;
+        this.dtCreated = dtCreated;
+        this.dtUpdated = dtUpdated;
+    }
+
+    public Long getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(Long uuid) {
+        this.uuid = uuid;
     }
 
     public String getLastName() {
@@ -73,5 +91,21 @@ public class NurseCreateDto {
 
     public void setBlockcode(String blockcode) {
         this.blockcode = blockcode;
+    }
+
+    public LocalDateTime getDtCreated() {
+        return dtCreated;
+    }
+
+    public void setDtCreated(LocalDateTime dtCreated) {
+        this.dtCreated = dtCreated;
+    }
+
+    public LocalDateTime getDtUpdated() {
+        return dtUpdated;
+    }
+
+    public void setDtUpdated(LocalDateTime dtUpdated) {
+        this.dtUpdated = dtUpdated;
     }
 }

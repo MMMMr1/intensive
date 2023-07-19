@@ -12,5 +12,5 @@ public interface DoctorDao extends Transactional{
     void delete(Long id);
     List<Doctor> findAll();
     Optional<Doctor> findDoctorById(Long id);
-
+    List<Doctor> findDoctorByWorkHours(Integer workHours);
 }

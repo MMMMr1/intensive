@@ -8,7 +8,6 @@ import com.jdbc.service.fabrics.DoctorServiceSingleton;
 import org.junit.jupiter.api.*;
 
 import java.beans.PropertyVetoException;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 

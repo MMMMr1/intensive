@@ -5,7 +5,6 @@ import com.jdbc.dto.doctor.DoctorCreateDto;
 import com.jdbc.dto.nurse.NurseCreateDto;
 import static org.assertj.core.api.Assertions.*;
 
-import com.jdbc.entity.Patient;
 import com.jdbc.orm.SessionManager;
 import com.jdbc.orm.fabrics.SessionFactorySingleton;
 import com.jdbc.service.api.DoctorService;
@@ -13,12 +12,9 @@ import com.jdbc.service.api.NurseService;
 import com.jdbc.service.fabrics.DoctorServiceSingleton;
 import com.jdbc.service.fabrics.NurseServiceSingleton;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.junit.Before;
 import org.junit.jupiter.api.*;
 
 import java.beans.PropertyVetoException;
-import java.util.Optional;
 
 public class PolymorphicTest {
     private DoctorService doctorService;

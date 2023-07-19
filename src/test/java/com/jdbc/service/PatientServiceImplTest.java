@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.persistence.EntityNotFoundException;
 import java.beans.PropertyVetoException;
 import java.util.NoSuchElementException;
 import java.util.UUID;
