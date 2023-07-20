@@ -1,10 +1,8 @@
-package com.jdbc.dto.doctor;
+package com.jdbc.dto.nurse;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.UUID;
-
-public class DoctorEditDto {
+public class NurseEditDto {
     @JsonProperty("id")
     private Long uuid;
     @JsonProperty("lastName")
@@ -15,19 +13,27 @@ public class DoctorEditDto {
     private String surName;
     @JsonProperty("position")
     private String position;
-    @JsonProperty("department")
-    private String department;
-
-    public DoctorEditDto() {
+    @JsonProperty("blockfloor")
+    private String blockfloor;
+    @JsonProperty("blockcode")
+    private String blockcode;
+    public NurseEditDto() {
     }
 
-    public DoctorEditDto(Long uuid, String lastName, String firstName, String surName, String position, String department) {
+    public NurseEditDto(Long uuid,
+                        String lastName,
+                        String firstName,
+                        String surName,
+                        String position,
+                        String blockfloor,
+                        String blockcode) {
         this.uuid = uuid;
         this.lastName = lastName;
         this.firstName = firstName;
         this.surName = surName;
         this.position = position;
-        this.department = department;
+        this.blockfloor = blockfloor;
+        this.blockcode = blockcode;
     }
 
     public Long getUuid() {
@@ -70,23 +76,19 @@ public class DoctorEditDto {
         this.position = position;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getBlockfloor() {
+        return blockfloor;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setBlockfloor(String blockfloor) {
+        this.blockfloor = blockfloor;
     }
 
-    @Override
-    public String toString() {
-        return "DoctorEditDto{" +
-                "uuid=" + uuid +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", surName='" + surName + '\'' +
-                ", position='" + position + '\'' +
-                ", department='" + department + '\'' +
-                '}';
+    public String getBlockcode() {
+        return blockcode;
+    }
+
+    public void setBlockcode(String blockcode) {
+        this.blockcode = blockcode;
     }
 }

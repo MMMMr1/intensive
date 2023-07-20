@@ -10,18 +10,18 @@ import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.beans.PropertyVetoException;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 class PatientServiceImplTest {
-
     private PatientService service;
     private UUID testUuid;
     private UUID testUuidDeleted;
-
     {
         try {
             service = PatientServiceSingleton.getInstance();
@@ -40,21 +40,10 @@ class PatientServiceImplTest {
                 "TestPatient"
         );
         testUuid = service.create(createPatient);
-
-        PatientCreateDto patientDeleted = new PatientCreateDto(
-                "TestPatient",
-                "TestPatient",
-                "TestPatient",
-                "TestPatient",
-                "TestPatient",
-                "TestPatient"
-        );
-        testUuidDeleted = service.create(patientDeleted);
     }
-
     @Test
     void test_WithValid_Data_create() {
-
+        assertEquals(testUuid, service.findPatientById(testUuid).get().getId());
     }
 
     @Test
@@ -70,9 +59,18 @@ class PatientServiceImplTest {
 
     @Test
     void test_WithRightUUID_delete() {
+        PatientCreateDto patientDeleted = new PatientCreateDto(
+                "TestPatient",
+                "TestPatient",
+                "TestPatient",
+                "TestPatient",
+                "TestPatient",
+                "TestPatient"
+        );
+        testUuidDeleted = service.create(patientDeleted);
         assertFalse(service.findPatientById(testUuidDeleted).isEmpty());
         service.delete(testUuidDeleted);
-        assertTrue(service.findPatientById(testUuidDeleted).isEmpty());
+        Assertions.assertThrows(NoSuchElementException.class, () -> service.findPatientById(testUuidDeleted).get());
     }
 
     @Test
@@ -98,6 +96,5 @@ class PatientServiceImplTest {
     @AfterEach
     public void down(){
         service.delete(testUuid);
-        service.delete(testUuidDeleted);
     }
 }

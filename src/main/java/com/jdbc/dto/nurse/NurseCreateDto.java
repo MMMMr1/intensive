@@ -1,8 +1,8 @@
-package com.jdbc.dto.doctor;
+package com.jdbc.dto.nurse;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class DoctorCreateDto {
+public class NurseCreateDto {
     @JsonProperty("lastName")
     private String lastName;
     @JsonProperty("firstName")
@@ -11,19 +11,20 @@ public class DoctorCreateDto {
     private String surName;
     @JsonProperty("position")
     private String position;
-    @JsonProperty("department")
-    private String department;
-
-
-
-    public DoctorCreateDto() {
+    @JsonProperty("blockfloor")
+    private String blockfloor;
+    @JsonProperty("blockcode")
+    private String blockcode;
+    public NurseCreateDto() {
     }
-    public DoctorCreateDto(String lastName, String firstName, String surName, String position, String department) {
+
+    public NurseCreateDto(String lastName, String firstName, String surName, String position, String blockfloor, String blockcode) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.surName = surName;
         this.position = position;
-        this.department = department;
+        this.blockfloor = blockfloor;
+        this.blockcode = blockcode;
     }
 
     public String getLastName() {
@@ -58,22 +59,19 @@ public class DoctorCreateDto {
         this.position = position;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getBlockfloor() {
+        return blockfloor;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setBlockfloor(String blockfloor) {
+        this.blockfloor = blockfloor;
     }
 
-    @Override
-    public String toString() {
-        return "DoctorCreateDto{" +
-                "lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", surName='" + surName + '\'' +
-                ", position='" + position + '\'' +
-                ", department='" + department + '\'' +
-                '}';
+    public String getBlockcode() {
+        return blockcode;
+    }
+
+    public void setBlockcode(String blockcode) {
+        this.blockcode = blockcode;
     }
 }

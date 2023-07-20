@@ -14,8 +14,6 @@ public class MedicalHistoryCreateMapper implements Mapper<MedicalHistoryCreateDt
 
     private void copy(MedicalHistoryCreateDto object, MedicalHistory history) {
         history.setDiagnosis(object.getDiagnosis());
-        history.setDoctor(object.getDoctor());
-        history.setPatient(object.getPatient());
         history.setTreatment(object.getTreatment());
     }
 }

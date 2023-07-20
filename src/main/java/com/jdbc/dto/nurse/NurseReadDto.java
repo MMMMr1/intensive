@@ -1,41 +1,48 @@
-package com.jdbc.dto.doctor;
+package com.jdbc.dto.nurse;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-public class DoctorReadDto {
-    private Long id;
+public class NurseReadDto {
+    private Long uuid;
     private String lastName;
     private String firstName;
     private String surName;
     private String position;
-    private String department;
-    private Integer workHours;
+    private String blockfloor;
+    private String blockcode;
     private LocalDateTime dtCreated;
     private LocalDateTime dtUpdated;
-
-    public DoctorReadDto() {
+    public NurseReadDto() {
     }
 
-
-    public DoctorReadDto(Long id, String lastName, String firstName, String surName, String position, String department, Integer workHours, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
-        this.id = id;
+    public NurseReadDto(Long uuid,
+                        String lastName,
+                        String firstName,
+                        String surName,
+                        String position,
+                        String blockfloor,
+                        String blockcode,
+                        LocalDateTime dtCreated,
+                        LocalDateTime dtUpdated) {
+        this.uuid = uuid;
         this.lastName = lastName;
         this.firstName = firstName;
         this.surName = surName;
         this.position = position;
-        this.department = department;
-        this.workHours = workHours;
+        this.blockfloor = blockfloor;
+        this.blockcode = blockcode;
         this.dtCreated = dtCreated;
         this.dtUpdated = dtUpdated;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUuid() {
+        return uuid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUuid(Long uuid) {
+        this.uuid = uuid;
     }
 
     public String getLastName() {
@@ -70,12 +77,20 @@ public class DoctorReadDto {
         this.position = position;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getBlockfloor() {
+        return blockfloor;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setBlockfloor(String blockfloor) {
+        this.blockfloor = blockfloor;
+    }
+
+    public String getBlockcode() {
+        return blockcode;
+    }
+
+    public void setBlockcode(String blockcode) {
+        this.blockcode = blockcode;
     }
 
     public LocalDateTime getDtCreated() {
@@ -92,13 +107,5 @@ public class DoctorReadDto {
 
     public void setDtUpdated(LocalDateTime dtUpdated) {
         this.dtUpdated = dtUpdated;
-    }
-
-    public Integer getWorkHours() {
-        return workHours;
-    }
-
-    public void setWorkHours(Integer workHours) {
-        this.workHours = workHours;
     }
 }

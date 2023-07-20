@@ -1,41 +1,42 @@
 package com.jdbc.service;
 
 import com.jdbc.dao.EntityTransaction;
-import com.jdbc.dao.api.DoctorDao;
-import com.jdbc.dto.doctor.DoctorCreateDto;
-import com.jdbc.dto.doctor.DoctorEditDto;
-import com.jdbc.dto.doctor.DoctorReadDto;
-import com.jdbc.entity.Doctor;
-import com.jdbc.mapper.mapper.*;
-import com.jdbc.service.api.DoctorService;
+import com.jdbc.dao.api.NurseDao;
+import com.jdbc.dto.nurse.NurseCreateDto;
+import com.jdbc.dto.nurse.NurseEditDto;
+import com.jdbc.dto.nurse.NurseReadDto;
+import com.jdbc.entity.Nurse;
+import com.jdbc.mapper.mapper.NurseCreateMapper;
+import com.jdbc.mapper.mapper.NurseEditMapper;
+import com.jdbc.mapper.mapper.NurseReadMapper;
+import com.jdbc.service.api.NurseService;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class DoctorServiceImpl implements DoctorService {
-    private final DoctorDao dao;
-    private final DoctorCreateMapper createMapper;
-    private final DoctorEditMapper editMapper;
-    private final DoctorReadMapper readMapper;
-    public DoctorServiceImpl(DoctorDao dao) {
+public class NurseServiceImpl implements NurseService {
+    private final NurseDao dao;
+    private final NurseCreateMapper createMapper;
+    private final NurseEditMapper editMapper;
+    private final NurseReadMapper readMapper;
+    public NurseServiceImpl(NurseDao dao) {
         this.dao = dao;
-        this.createMapper = new DoctorCreateMapper();
-        this.readMapper = new DoctorReadMapper();
-        this.editMapper = new DoctorEditMapper();
+        createMapper = new NurseCreateMapper();
+        editMapper = new NurseEditMapper();
+        readMapper = new NurseReadMapper();
     }
     @Override
-    public Long create(DoctorCreateDto doctorCreateDto) {
-//        Transactional
+    public Long create(NurseCreateDto nurseDto) {
         EntityTransaction transaction = new EntityTransaction();
         transaction.initTransaction(dao);
         Long uuid;
         try {
-            Doctor doctor = createMapper.map(doctorCreateDto);
-            doctor.setDtCreated(LocalDateTime.now());
-            doctor.setDtUpdated(LocalDateTime.now());
-            uuid = dao.create(doctor);
+            Nurse nurse = createMapper.map(nurseDto);
+            nurse.setDtCreated(LocalDateTime.now());
+            nurse.setDtUpdated(LocalDateTime.now());
+            uuid = dao.create(nurse);
             transaction.commit();
             return uuid;
         } catch (RuntimeException e) {
@@ -46,9 +47,8 @@ public class DoctorServiceImpl implements DoctorService {
         }
     }
     @Override
-    public Optional<DoctorReadDto> findDoctorById(Long id) {
-        return dao.findDoctorById(id)
-                .map(readMapper::map);
+    public Optional<Nurse> findNurseById(Long id) {
+            return dao.findNurseById(id);
     }
     @Override
     public void delete(Long uuid) {
@@ -67,13 +67,13 @@ public class DoctorServiceImpl implements DoctorService {
         }
     }
     @Override
-    public void update(Long uuid, DoctorEditDto patient) {
+    public void update(Long uuid, NurseEditDto nurse) {
         checkUuid(uuid);
         //        Transactional
         EntityTransaction transaction = new EntityTransaction();
         transaction.initTransaction(dao);
         try {
-            Doctor map = editMapper.map(patient);
+            Nurse map = editMapper.map(nurse);
             map.setDtUpdated(LocalDateTime.now());
             dao.update(uuid, map);
             transaction.commit();
@@ -85,13 +85,13 @@ public class DoctorServiceImpl implements DoctorService {
         }
     }
     @Override
-    public List<DoctorReadDto> findAll() {
+    public List<NurseReadDto> findAll() {
         return dao.findAll().stream()
                 .map(readMapper::map)
                 .collect(Collectors.toList());
     }
     private void checkUuid(Long uuid){
         if (uuid <= 0 ) throw  new RuntimeException("invalid uuid "+ uuid);
-        dao.findDoctorById(uuid).orElseThrow(() -> new RuntimeException("such uuid " + uuid + " is not exist"));
+        dao.findNurseById(uuid).orElseThrow(() -> new RuntimeException("such uuid " + uuid + " is not exist"));
     }
 }

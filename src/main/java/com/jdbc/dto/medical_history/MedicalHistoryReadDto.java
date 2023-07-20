@@ -6,7 +6,7 @@ import java.util.UUID;
 public class MedicalHistoryReadDto {
     private UUID uuid;
     private UUID patient;
-    private UUID doctor;
+    private Long doctor;
     private String diagnosis;
     private String treatment;
     private LocalDateTime dtCreated;
@@ -15,7 +15,7 @@ public class MedicalHistoryReadDto {
     public MedicalHistoryReadDto() {
     }
 
-    public MedicalHistoryReadDto(UUID uuid, UUID patient, UUID doctor, String diagnosis, String treatment, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
+    public MedicalHistoryReadDto(UUID uuid, UUID patient, Long doctor, String diagnosis, String treatment, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
         this.uuid = uuid;
         this.patient = patient;
         this.doctor = doctor;
@@ -41,11 +41,11 @@ public class MedicalHistoryReadDto {
         this.patient = patient;
     }
 
-    public UUID getDoctor() {
+    public Long getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(UUID doctor) {
+    public void setDoctor(Long doctor) {
         this.doctor = doctor;
     }
 

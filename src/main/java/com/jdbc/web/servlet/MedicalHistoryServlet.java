@@ -36,13 +36,20 @@ public class MedicalHistoryServlet extends HttpServlet {
 
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-
+        PrintWriter out = resp.getWriter();
+        try {
         List<Object> collect = service.findAll().stream()
                 .map(s ->  gson.toJson(s))
                 .collect(Collectors.toList());
-        PrintWriter out = resp.getWriter();
         out.print(collect);
         out.flush();
+        }catch (RuntimeException e) {
+            if (e.getCause() != null) {
+                out.write("<p>" + e.getMessage() + ": " + e.getCause() + "</p>");
+            } else {
+                out.write("<p>" + e.getMessage() + "</p>");
+            }
+        }
     }
 
     @Override
@@ -50,30 +57,52 @@ public class MedicalHistoryServlet extends HttpServlet {
                           HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
+        PrintWriter out = resp.getWriter();
+        try {
         MedicalHistoryCreateDto history = objectMapper.readValue(req.getReader(), MedicalHistoryCreateDto.class);
         service.create(history);
+        } catch (RuntimeException e) {
+            if (e.getCause() != null) {
+                out.write("<p>" + e.getMessage() + ": " + e.getCause() + "</p>");
+            } else {
+                out.write("<p>" + e.getMessage() + "</p>");
+            }
+        }
     }
 
         @Override
         protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             req.setCharacterEncoding("UTF-8");
             resp.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter writer = resp.getWriter();
+            PrintWriter out = resp.getWriter();
+            try {
             String uuidParam = req.getParameter("uuid");
             UUID uuid = UUID.fromString(uuidParam);
             service.delete(uuid);
+            } catch (RuntimeException e) {
+                if (e.getCause() != null) {
+                    out.write("<p>" + e.getMessage() + ": " + e.getCause() + "</p>");
+                } else {
+                    out.write("<p>" + e.getMessage() + "</p>");
+                }
+            }
         }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
+        PrintWriter out = resp.getWriter();
+        try {
         MedicalHistoryEditDto history = objectMapper.readValue(req.getReader(), MedicalHistoryEditDto.class);
-
-        PrintWriter writer = resp.getWriter();
-        writer.write("uuid" + history.getUuid()+ " history "+ history.getUuid());
         service.update(history.getUuid(), history);
+        } catch (RuntimeException e) {
+            if (e.getCause() != null) {
+                out.write("<p>" + e.getMessage() + ": " + e.getCause() + "</p>");
+            } else {
+                out.write("<p>" + e.getMessage() + "</p>");
+            }
+        }
     }
 }
 

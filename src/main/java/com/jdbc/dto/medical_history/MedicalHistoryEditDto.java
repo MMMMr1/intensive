@@ -11,7 +11,7 @@ public class MedicalHistoryEditDto {
     @JsonProperty("patient")
     private UUID patient;
     @JsonProperty("doctor")
-    private UUID doctor;
+    private Long doctor;
     @JsonProperty("diagnosis")
     private String diagnosis;
     @JsonProperty("treatment")
@@ -20,7 +20,7 @@ public class MedicalHistoryEditDto {
     public MedicalHistoryEditDto() {
     }
 
-    public MedicalHistoryEditDto(UUID uuid, UUID patient, UUID doctor, String diagnosis, String treatment) {
+    public MedicalHistoryEditDto(UUID uuid, UUID patient, Long doctor, String diagnosis, String treatment) {
         this.uuid = uuid;
         this.patient = patient;
         this.doctor = doctor;
@@ -44,11 +44,11 @@ public class MedicalHistoryEditDto {
         this.patient = patient;
     }
 
-    public UUID getDoctor() {
+    public Long getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(UUID doctor) {
+    public void setDoctor(Long doctor) {
         this.doctor = doctor;
     }
 

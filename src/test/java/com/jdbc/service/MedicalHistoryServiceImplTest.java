@@ -15,6 +15,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.persistence.*;
 import java.beans.PropertyVetoException;
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ class MedicalHistoryServiceImplTest {
     private UUID testUuid;
     private UUID testUuidDeleted;
     private UUID patient;
-    private UUID doctor;
+    private Long doctor;
 
     {
         try {
@@ -64,23 +65,19 @@ class MedicalHistoryServiceImplTest {
                 "GG2 - dkd",
                 "dddddd");
         testUuid = service.create(createHistory);
-        MedicalHistoryCreateDto historyDeleted = new MedicalHistoryCreateDto(
-                patient,
-                doctor,
-                "DDD - dkd",
-                "dddddd");
-        testUuidDeleted = service.create(createHistory);
     }
 
 
     @Test
     void test_WithRightUUID_findMedicalHistoryById() {
-        assertFalse( service.findMedicalHistoryById(testUuid).isEmpty());
+        assertTrue( service.findMedicalHistoryById(testUuid).isPresent());
     }
     @Test
     void test_WithWrongUUID_findMedicalHistoryById() {
         UUID wrongUuid =UUID.fromString("0171cb42-e21f-46db-aba7-c4b9107df991");
-        assertTrue(service.findMedicalHistoryById(wrongUuid).isEmpty());
+        assertThrows(NoResultException.class,() ->
+                service.findMedicalHistoryById(wrongUuid));
+
     }
 
     @Test
@@ -103,6 +100,12 @@ class MedicalHistoryServiceImplTest {
     }
     @Test
     void test_WithRightUUID_delete() {
+        MedicalHistoryCreateDto historyDeleted = new MedicalHistoryCreateDto(
+                patient,
+                doctor,
+                "DDD - dkd",
+                "dddddd");
+        testUuidDeleted = service.create(historyDeleted);
         assertFalse( service.findMedicalHistoryById(testUuidDeleted).isEmpty());
         service.delete(testUuidDeleted);
         assertTrue( service.findMedicalHistoryById(testUuidDeleted).isEmpty());
@@ -110,7 +113,6 @@ class MedicalHistoryServiceImplTest {
     @AfterEach
     public void down(){
         service.delete(testUuid);
-        service.delete(testUuidDeleted);
         patientService.delete(patient);
         doctorService.delete(doctor);
     }

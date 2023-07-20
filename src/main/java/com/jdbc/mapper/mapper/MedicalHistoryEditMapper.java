@@ -17,8 +17,6 @@ public class MedicalHistoryEditMapper implements Mapper<MedicalHistoryEditDto, M
     private void copy(MedicalHistoryEditDto object, MedicalHistory history) {
         history.setUuid(object.getUuid());
         history.setDiagnosis(object.getDiagnosis());
-        history.setDoctor(object.getDoctor());
-        history.setPatient(object.getPatient());
         history.setTreatment(object.getTreatment());
     }
 

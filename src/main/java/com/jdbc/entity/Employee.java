@@ -1,31 +1,37 @@
-package com.jdbc.dto.doctor;
+package com.jdbc.entity;
 
+
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-public class DoctorReadDto {
+@Entity
+@Table(schema = "app", name = "employees")
+@Inheritance(strategy = InheritanceType.JOINED)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @Column(name = "lastname")
     private String lastName;
+    @Column(name = "firstname")
     private String firstName;
+    @Column(name = "surname")
     private String surName;
-    private String position;
-    private String department;
-    private Integer workHours;
+    @Column(name = "dt_created")
     private LocalDateTime dtCreated;
+    @Column(name = "dt_updated")
     private LocalDateTime dtUpdated;
 
-    public DoctorReadDto() {
+    public Employee() {
     }
-
-
-    public DoctorReadDto(Long id, String lastName, String firstName, String surName, String position, String department, Integer workHours, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
+    public Employee(Long id, String lastName, String firstName, String surName, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
         this.surName = surName;
-        this.position = position;
-        this.department = department;
-        this.workHours = workHours;
         this.dtCreated = dtCreated;
         this.dtUpdated = dtUpdated;
     }
@@ -62,22 +68,6 @@ public class DoctorReadDto {
         this.surName = surName;
     }
 
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
     public LocalDateTime getDtCreated() {
         return dtCreated;
     }
@@ -92,13 +82,5 @@ public class DoctorReadDto {
 
     public void setDtUpdated(LocalDateTime dtUpdated) {
         this.dtUpdated = dtUpdated;
-    }
-
-    public Integer getWorkHours() {
-        return workHours;
-    }
-
-    public void setWorkHours(Integer workHours) {
-        this.workHours = workHours;
     }
 }

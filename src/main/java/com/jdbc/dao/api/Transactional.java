@@ -1,7 +1,7 @@
 package com.jdbc.dao.api;
 
-import java.sql.Connection;
+import org.hibernate.Session;
 
 public interface Transactional {
-    void setConnection(Connection connection);
+    void setSession(Session session);
 }

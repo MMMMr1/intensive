@@ -22,7 +22,12 @@
         <servlet-api.version>4.0.1</servlet-api.version>
         <jackson-databind.version>2.15.2</jackson-databind.version>
         <jackson-core.version>2.15.2</jackson-core.version>
-        <c3p0.version>2.15.2</c3p0.version>
+        <lombok.version>1.18.26</lombok.version>
+        <hibernate-core.version>5.6.14.Final</hibernate-core.version>
+        <junit.version>4.13.2</junit.version>
+        <assertj-core.version>3.24.2</assertj-core.version>
+        <log4j-api.version>2.20.0</log4j-api.version>
+        <hibernate-ehcache.version>5.6.14.Final</hibernate-ehcache.version>
 
     </properties>
 
@@ -60,22 +65,37 @@
             <version>${jackson-core.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.5.5</version>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate-core.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.24.2</version>
+            <version>${assertj-core.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13.2</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>${hibernate-ehcache.version}</version>
         </dependency>
     </dependencies>
 

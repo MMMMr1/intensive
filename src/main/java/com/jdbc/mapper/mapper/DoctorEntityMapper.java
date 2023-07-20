@@ -5,11 +5,11 @@ import com.jdbc.entity.Doctor;
 import com.jdbc.mapper.Mapper;
 
 
-public class DoctorReadMapper implements Mapper<Doctor, DoctorReadDto> {
+public class DoctorEntityMapper implements Mapper<DoctorReadDto, Doctor> {
 
     @Override
-    public DoctorReadDto map(Doctor object) {
-         return new DoctorReadDto(
+    public Doctor  map(DoctorReadDto object) {
+         return new Doctor(
                 object.getId(),
                  object.getLastName(),
                  object.getFirstName(),
