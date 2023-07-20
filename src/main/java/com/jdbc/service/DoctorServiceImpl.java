@@ -15,19 +15,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class DoctorServiceImpl implements DoctorService {
-
     private final DoctorDao dao;
     private final DoctorCreateMapper createMapper;
     private final DoctorEditMapper editMapper;
     private final DoctorReadMapper readMapper;
-
     public DoctorServiceImpl(DoctorDao dao) {
         this.dao = dao;
         this.createMapper = new DoctorCreateMapper();
         this.readMapper = new DoctorReadMapper();
         this.editMapper = new DoctorEditMapper();
     }
-
     @Override
     public Long create(DoctorCreateDto doctorCreateDto) {
 //        Transactional
@@ -48,13 +45,11 @@ public class DoctorServiceImpl implements DoctorService {
             transaction.endTransaction();
         }
     }
-
     @Override
     public Optional<DoctorReadDto> findDoctorById(Long id) {
         return dao.findDoctorById(id)
                 .map(readMapper::map);
     }
-
     @Override
     public void delete(Long uuid) {
         checkUuid(uuid);
@@ -71,7 +66,6 @@ public class DoctorServiceImpl implements DoctorService {
             transaction.endTransaction();
         }
     }
-
     @Override
     public void update(Long uuid, DoctorEditDto patient) {
         checkUuid(uuid);
@@ -90,7 +84,6 @@ public class DoctorServiceImpl implements DoctorService {
             transaction.endTransaction();
         }
     }
-
     @Override
     public List<DoctorReadDto> findAll() {
         return dao.findAll().stream()

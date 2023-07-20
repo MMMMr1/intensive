@@ -29,7 +29,6 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
     private final MedicalHistoryReadMapper readMapper;
     private final DoctorEntityMapper doctorEntityMapper;
     private final PatientEntityMapper patientEntityMapper;
-
     public MedicalHistoryServiceImpl(MedicalHistoryDao dao,
                                      DoctorService doctorService,
                                      PatientService patientService ) {
@@ -41,7 +40,6 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
         this.createMapper = new MedicalHistoryCreateMapper();
         this.readMapper = new MedicalHistoryReadMapper();
         this.editMapper = new MedicalHistoryEditMapper();
-
     }
 
     @Override
@@ -121,7 +119,6 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
                         return s;
                     })
                     .orElseThrow(() -> new RuntimeException("can not convert"));
-
             dao.update(uuid, medicalHistory);
             transaction.commit();
         } catch (RuntimeException e) {
@@ -140,7 +137,7 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
     }
     private void checkUuid(UUID uuid){
         if (uuid == null) throw  new RuntimeException("invalid uuid "+ uuid);
-        dao.findMedicalHistoryById(uuid).orElseThrow(() -> new RuntimeException("such uuid " + uuid + " is not exist"));
-
+        dao.findMedicalHistoryById(uuid)
+                .orElseThrow(() -> new RuntimeException("such uuid " + uuid + " is not exist"));
     }
 }

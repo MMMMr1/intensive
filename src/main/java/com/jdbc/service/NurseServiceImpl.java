@@ -50,7 +50,6 @@ public class NurseServiceImpl implements NurseService {
     public Optional<Nurse> findNurseById(Long id) {
             return dao.findNurseById(id);
     }
-
     @Override
     public void delete(Long uuid) {
         checkUuid(uuid);
@@ -67,7 +66,6 @@ public class NurseServiceImpl implements NurseService {
             transaction.endTransaction();
         }
     }
-
     @Override
     public void update(Long uuid, NurseEditDto nurse) {
         checkUuid(uuid);
@@ -86,7 +84,6 @@ public class NurseServiceImpl implements NurseService {
             transaction.endTransaction();
         }
     }
-
     @Override
     public List<NurseReadDto> findAll() {
         return dao.findAll().stream()

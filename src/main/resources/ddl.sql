@@ -71,3 +71,5 @@ CREATE TABLE IF NOT EXISTS app.medical_histories
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 );
+CREATE INDEX doctors_workhours_index
+ON app.doctors (workHours);

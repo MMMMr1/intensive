@@ -14,11 +14,9 @@ import java.util.*;
 public class DoctorDaoImpl implements DoctorDao {
     private SessionManager sessionManager;
     private Session session;
-
     public DoctorDaoImpl(SessionManager sessionManager) {
         this.sessionManager = sessionManager;
     }
-
     @Override
     public Long create(Doctor doctor) {
         try {
@@ -30,7 +28,6 @@ public class DoctorDaoImpl implements DoctorDao {
             throw e;
         }
     }
-
     @Override
     public void update(Long id, Doctor doctor) {
         log.info("update "+ id);
@@ -41,7 +38,6 @@ public class DoctorDaoImpl implements DoctorDao {
             throw e;
         }
     }
-
     @Override
     public void delete(Long id) {
         log.info("delete "+ id);
@@ -54,7 +50,6 @@ public class DoctorDaoImpl implements DoctorDao {
             throw e;
         }
     }
-
     @Override
     public List<Doctor> findAll() {
         try (Session session = sessionManager.getSession()) {
@@ -67,7 +62,6 @@ public class DoctorDaoImpl implements DoctorDao {
             throw e;
         }
     }
-
     @Override
     public Optional<Doctor> findDoctorById(Long id) {
         try (Session session = sessionManager.getSession()) {
@@ -78,12 +72,13 @@ public class DoctorDaoImpl implements DoctorDao {
             throw e;
         }
     }
-
-
     public List<Doctor> findDoctorByWorkHours(Integer minWorkHours) {
         try (Session session = sessionManager.getSession()) {
             session.getTransaction().begin();
-            List<Doctor> list = session.createQuery("FROM Doctor  WHERE  workHours > "+minWorkHours, Doctor.class).getResultList();
+            List<Doctor> list = session.createQuery("FROM Doctor  WHERE  workHours > :minWorkHours", Doctor.class)
+                    .setParameter("minWorkHours",minWorkHours)
+                    .setCacheable(true)
+                    .getResultList();
             session.getTransaction().commit();
             return list;
         } catch (Exception e) {
@@ -91,7 +86,6 @@ public class DoctorDaoImpl implements DoctorDao {
             throw e;
         }
     }
-
     @Override
     public void setSession(Session session) {
         this.session = session;
