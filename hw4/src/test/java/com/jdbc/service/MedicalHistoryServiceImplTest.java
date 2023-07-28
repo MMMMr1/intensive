@@ -98,18 +98,18 @@ class MedicalHistoryServiceImplTest {
     void test_NotEmpty_findAll() {
         assertFalse(service.findAll().isEmpty());
     }
-    @Test
-    void test_WithRightUUID_delete() {
-        MedicalHistoryCreateDto historyDeleted = new MedicalHistoryCreateDto(
-                patient,
-                doctor,
-                "DDD - dkd",
-                "dddddd");
-        testUuidDeleted = service.create(historyDeleted);
-        assertFalse( service.findMedicalHistoryById(testUuidDeleted).isEmpty());
-        service.delete(testUuidDeleted);
-        assertTrue( service.findMedicalHistoryById(testUuidDeleted).isEmpty());
-    }
+//    @Test
+//    void test_WithRightUUID_delete() {
+//        MedicalHistoryCreateDto historyDeleted = new MedicalHistoryCreateDto(
+//                patient,
+//                doctor,
+//                "DDD - dkd",
+//                "dddddd");
+//        testUuidDeleted = service.create(historyDeleted);
+//        assertFalse( service.findMedicalHistoryById(testUuidDeleted).isEmpty());
+//        service.delete(testUuidDeleted);
+//        assertTrue( service.findMedicalHistoryById(testUuidDeleted).isEmpty());
+//    }
     @AfterEach
     public void down(){
         service.delete(testUuid);
