@@ -1,7 +1,6 @@
 package com.hospital.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -9,7 +8,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -30,25 +28,14 @@ public class HibernateConfig {
         this.environment = environment;
     }
 
-//    @Value ("${hibernate.show_sql}")
-//    private String HIBERNATE_SHOW_SQL;
-//    @Value ("${hibernate.dialect}")
-//    private String HIBERNATE_DIALECT;
-//    @Value ("${connection.password}")
-//    private String DB_PASSWORD;
-//    @Value ("${connection.username}")
-//    private String DB_USER;
-//    @Value ("${connection.url}")
-//    private String DB_URL;
-//    @Value ("${driver_class}")
-//    private String DB_DRIVER_CLASS;
-private Properties hibernateProperties() {
-    Properties properties = new Properties();
-    properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
-    properties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql", "true"));
+    private Properties hibernateProperties() {
+        Properties properties = new Properties();
+        properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
+        properties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql", "true"));
 
-    return properties;
-}
+        return properties;
+    }
+
     @Bean()
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -58,7 +45,6 @@ private Properties hibernateProperties() {
         dataSource.setPassword(environment.getRequiredProperty("connection.password"));
         return dataSource;
     }
-
 
 
     @Bean
@@ -82,13 +68,14 @@ private Properties hibernateProperties() {
         transactionManager.setEntityManagerFactory(entityManagerFactory);
         return transactionManager;
     }
+
     @Bean
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
     }
 
     @Bean
-    public ObjectMapper objectMapper(){
+    public ObjectMapper objectMapper() {
         return new ObjectMapper();
     }
 }
