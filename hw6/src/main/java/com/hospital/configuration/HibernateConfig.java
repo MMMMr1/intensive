@@ -88,4 +88,5 @@ public class HibernateConfig {
                 .defaultViewInclusion(true)
                 .serializationInclusion(JsonInclude.Include.NON_NULL);
     }
+
 }
