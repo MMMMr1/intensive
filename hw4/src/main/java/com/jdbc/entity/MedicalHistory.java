@@ -2,12 +2,13 @@ package com.jdbc.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "app.medical_histories")
 public class MedicalHistory  {
     @Id
-    private Long id;
+    private UUID uuid;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_uuid")
     private Patient patient;
@@ -26,8 +27,8 @@ public class MedicalHistory  {
     public MedicalHistory() {
     }
 
-    public MedicalHistory(Long id, Patient patient, Doctor doctor, String diagnosis, String treatment, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
-        this.id = id;
+    public MedicalHistory(UUID uuid, Patient patient, Doctor doctor, String diagnosis, String treatment, LocalDateTime dtCreated, LocalDateTime dtUpdated) {
+        this.uuid = uuid;
         this.patient = patient;
         this.doctor = doctor;
         this.diagnosis = diagnosis;
@@ -36,12 +37,12 @@ public class MedicalHistory  {
         this.dtUpdated = dtUpdated;
     }
 
-    public Long getId() {
-        return id;
+    public UUID getUuid() {
+        return uuid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public Patient getPatient() {

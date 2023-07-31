@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>employees</title>
+</head>
+<body>
+<table>
+<tbody th:each="employee : ${employees.content}" th:remove="tag">
+<tr>
+<td th:text="${employee.id}">Id</td>
+    <td th:text="${employee.lastName}">LastName</td>
+    <td th:text="${employee.firstName}">FirstName</td>
+    <td th:text="${employee.surName}">surName</td>
+    <td th:text="${employee.position}">position</td>
+    <td th:text="${employee.department}">department</td>
+</tr>
+</tbody>
+</table>
+
+   </body>
+</html>
