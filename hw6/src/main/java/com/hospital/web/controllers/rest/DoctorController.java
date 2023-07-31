@@ -1,9 +1,7 @@
-package com.hospital.web.controllers;
+package com.hospital.web.controllers.rest;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.hospital.core.View;
-import com.hospital.core.dto.PatientDto;
-import com.hospital.service.api.PatientService;
+import com.hospital.core.dto.DoctorDto;
+import com.hospital.service.api.DoctorService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,48 +16,43 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1/patients")
-public class PatientController {
-    private final PatientService service;
+@RequestMapping("/api/v1/doctors")
+public class DoctorController {
+    private final DoctorService service;
     private static final Logger logger =
-            LoggerFactory.getLogger(PatientController.class);
-    @JsonView(View.InInfo.class)
+            LoggerFactory.getLogger(DoctorController.class);
     @RequestMapping(method = RequestMethod.POST)
-    protected ResponseEntity<?> create(@RequestBody @Validated PatientDto patientDto)   {
-        logger.info("create  patient "+ patientDto);
-        service.create(patientDto);
+    protected ResponseEntity<?> create(@RequestBody @Validated DoctorDto doctor)   {
+        logger.info("create  employee "+ doctor);
+        service.create(doctor);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
-    @JsonView(View.OutInfo.class)
     @RequestMapping(method = RequestMethod.GET)
-    protected ResponseEntity<Page<PatientDto>> getAll(
+    protected ResponseEntity<Page<DoctorDto>> getAll(
             @RequestParam(name = "page", defaultValue = "0")  Integer page,
             @RequestParam(name = "size", defaultValue = "20") Integer size) {
         Pageable paging = PageRequest.of(page, size);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(service.getPage(paging));
     }
-    @JsonView(View.OutInfo.class)
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<PatientDto> get(@PathVariable("id") Long id) {
+    public ResponseEntity<DoctorDto> get(@PathVariable("id") Long id) {
         logger.info("get employee with "+ id);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(service.findPatentById(id));
+                .body(service.findDoctorById(id));
     }
-    @JsonView(View.InInfo.class)
     @RequestMapping(path = "/{id}/dt_update/{dt_update}", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@PathVariable("id") Long id,
                                         @PathVariable("dt_update") Instant dtUpdate,
-                                        @RequestBody @Validated PatientDto patientDto) {
-        service.update(id, dtUpdate, patientDto);
-        logger.info("update patient with "+ id);
+                                        @RequestBody @Validated DoctorDto doctor) {
+        service.update(id, dtUpdate, doctor);
+        logger.info("update employee with "+ id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable("id") Long id ) {
         service.delete(id);
-        logger.info("delete patient with "+ id);
+        logger.info("delete user with "+ id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

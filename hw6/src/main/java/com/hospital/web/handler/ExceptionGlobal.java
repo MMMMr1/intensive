@@ -1,4 +1,4 @@
-package com.hospital.web;
+package com.hospital.web.handler;
 
 import com.hospital.core.dto.error.ExceptionErrorDTO;
 import com.hospital.core.dto.error.ExceptionListDTO;
@@ -22,7 +22,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestControllerAdvice
+@RestControllerAdvice(basePackages = "com.hospital.web.controllers")
 public class ExceptionGlobal  {
 
     //400 @Validated

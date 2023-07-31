@@ -16,25 +16,25 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatientDto {
-    @JsonView(View.OutInfo.class)
+//    @JsonView(View.OutInfo.class)
     private Long id;
-    @JsonView(View.InInfo.class)
+//    @JsonView(View.InInfo.class)
     private String lastName;
-    @JsonView(View.InInfo.class)
+//    @JsonView(View.InInfo.class)
     private String firstName;
-    @JsonView(View.InInfo.class)
+//    @JsonView(View.InInfo.class)
     private String surName;
-    @JsonView(View.InInfo.class)
+//    @JsonView(View.InInfo.class)
     private String address;
-    @JsonView(View.InInfo.class)
+//    @JsonView(View.InInfo.class)
     private String phone;
-    @JsonView(View.InInfo.class)
+//    @JsonView(View.InInfo.class)
     private String medicalCardNumber;
-    @JsonView({View.OutInfo.class})
+//    @JsonView({View.OutInfo.class})
     @JsonSerialize(converter = CustomInstantConverter.Serializer.class)
     @JsonProperty("dt_created")
     private Instant dtCreated;
-    @JsonView(View.OutInfo.class)
+//    @JsonView(View.OutInfo.class)
     @JsonSerialize(converter = CustomInstantConverter.Serializer.class)
     @JsonProperty("dt_updated")
     private Instant dtUpdated;

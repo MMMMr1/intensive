@@ -20,6 +20,6 @@ public class Doctor extends Employee {
     @OneToMany(mappedBy = "doctor",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<MedicalHistory> patients = new ArrayList<>();
+    private List<MedicalHistory> patients = new ArrayList<>();;
 
 }
